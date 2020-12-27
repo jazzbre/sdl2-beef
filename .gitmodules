@@ -1,0 +1,6 @@
+[submodule "submodules/SDL"]
+	path = submodules/SDL
+	url = https://github.com/spurious/SDL-mirror.git
+[submodule "submodules/bx"]
+	path = submodules/bx
+	url = https://github.com/bkaradzic/bx.git

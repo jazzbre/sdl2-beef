@@ -1,0 +1,36 @@
+FileVersion = 1
+
+[Project]
+Name = "sdl2-beef"
+TargetType = "BeefLib"
+StartupObject = "sdl2_beef.Program"
+
+[Configs.Debug.Win64]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Debug.lib"]
+
+[Configs.Release.Win64]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
+
+[Configs.Paranoid.Win64]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
+
+[Configs.Test.Win64]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
+
+[Configs.Debug.macOS]
+LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Debug.a"]
+OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
+
+[Configs.Release.macOS]
+LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
+OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
+
+[Configs.Paranoid.macOS]
+LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
+OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
+
+[Configs.Test.macOS]
+LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
+OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
+
+

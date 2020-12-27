@@ -1,0 +1,5 @@
+FileVersion = 1
+Projects = {sdl2-beef = {Path = "."}, example = {Path = "example"}}
+
+[Workspace]
+StartupProject = "example"
