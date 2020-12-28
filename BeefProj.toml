@@ -7,19 +7,19 @@ StartupObject = "sdl2_beef.Program"
 
 [Configs.Debug.Win64]
 LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Debug.lib"]
-OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib"
+OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib Advapi32.lib" 
 
 [Configs.Release.Win64]
 LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
-OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib"
+OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib Advapi32.lib"
 
 [Configs.Paranoid.Win64]
 LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
-OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib"
+OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib Advapi32.lib"
 
 [Configs.Test.Win64]
 LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
-OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib"
+OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib Advapi32.lib"
 
 [Configs.Debug.macOS]
 LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Debug.a"]
