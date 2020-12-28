@@ -1,3 +1,5 @@
+@echo off
+
 submodules\bx\tools\bin\windows\genie vs2019
 
 echo Check Visual Studio version
