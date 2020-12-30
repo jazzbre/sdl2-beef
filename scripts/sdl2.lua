@@ -36,7 +36,6 @@ project "sdl2"
 	}
 
 	files {
-		path.join(SOURCE_DIR, "config/linux/**"),
 		path.join(SOURCE_DIR, "SDL/include/*.h"),
 		path.join(SOURCE_DIR, "SDL/src/*.c"),
 		path.join(SOURCE_DIR, "SDL/src/**.h"),	
@@ -125,6 +124,7 @@ project "sdl2"
    
    	configuration { "linux*" }
 	files {
+		path.join(SOURCE_DIR, "config/linux/**"),	
 		path.join(SOURCE_DIR, "SDL/src/audio/pulseaudio/*.c"),
 		path.join(SOURCE_DIR, "SDL/src/audio/dsp/*.c"),
 		path.join(SOURCE_DIR, "SDL/src/audio/alsa/*.c"),
