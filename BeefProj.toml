@@ -37,4 +37,20 @@ OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framew
 LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
 OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
 
+[Configs.Debug.Linux64]
+LibPaths = ["$(ProjectDir)\\.build\\linux64_gcc\\bin\\libsdl2Debug.a"]
+OtherLinkFlags = "$(LinkFlags) -Wl,--no-undefined -lm -ldl -lpthread -lrt -lhidapi-hidraw"
+
+[Configs.Release.Linux64]
+LibPaths = ["$(ProjectDir)\\.build\\linux64_gcc\\bin\\libsdl2Release.a"]
+OtherLinkFlags = "$(LinkFlags) -Wl,--no-undefined -lm -ldl -lpthread -lrt -lhidapi-hidraw"
+
+[Configs.Paranoid.Linux64]
+LibPaths = ["$(ProjectDir)\\.build\\linux64_gcc\\bin\\libsdl2Release.a"]
+OtherLinkFlags = "$(LinkFlags) -Wl,--no-undefined -lm -ldl -lpthread -lrt -lhidapi-hidraw"
+
+[Configs.Test.Linux64]
+LibPaths = ["$(ProjectDir)\\.build\\linux64_gcc\\bin\\libsdl2Release.a"]
+OtherLinkFlags = "$(LinkFlags) -Wl,--no-undefined -lm -ldl -lpthread -lrt -lhidapi-hidraw"
+
 
