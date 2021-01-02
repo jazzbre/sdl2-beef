@@ -99,6 +99,10 @@ project "sdl2"
 	}
    
 	configuration { "osx" }
+	buildoptions {
+		"-Wno-objc-method-access",
+		"-Wno-deprecated-declarations",
+	}
 	files {
 		path.join(SOURCE_DIR, "SDL/src/haptic/darwin/*.c"),
 		path.join(SOURCE_DIR, "SDL/src/hidapi/mac/*.c"),
@@ -148,6 +152,15 @@ project "sdl2"
 		path.join(SOURCE_DIR, "SDL/src/libm/*.c"),	
 		path.join(SOURCE_DIR, "SDL/src/misc/unix/*.c"),
 		path.join(SOURCE_DIR, "SDL/src/locale/unix/*.c"),		
-    }
+	}
+	
+	configuration ("osx* or linux*")
+		buildoptions {
+			"-Wno-unused-function",
+			"-Wno-unused-parameter",
+			"-Wno-undef",
+			"-Wno-sign-compare",
+			"-Wno-compare-distinct-pointer-types",
+		}
 	
 	configuration {}

@@ -17,8 +17,9 @@
 
 
 ## Usage
+Open workspace and set Example as Startup project and Run!
+MacOS/Linux can be built and run with provided VSCode project (expects Beef git clone in the same root folder as this project).
 
-No example currently available, but there's one in [bgfx-beef](https://github.com/jazzbre/bgfx-beef) repository which uses SDL.
 
 ## Future work
 iOS and Android build scripts.
