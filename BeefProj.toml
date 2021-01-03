@@ -22,19 +22,19 @@ LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\sdl2Release.lib"]
 OtherLinkFlags = "$(LinkFlags) Setupapi.lib Ole32.lib Shell32.lib Winmm.lib Imm32.lib OleAut32.lib Advapi32.lib Version.lib"
 
 [Configs.Debug.macOS]
-LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Debug.a"]
+LibPaths = ["$(ProjectDir)\\.build\\osx-x64\\bin\\libsdl2Debug.a"]
 OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
 
 [Configs.Release.macOS]
-LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
+LibPaths = ["$(ProjectDir)\\.build\\osx-x64\\bin\\libsdl2Release.a"]
 OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
 
 [Configs.Paranoid.macOS]
-LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
+LibPaths = ["$(ProjectDir)\\.build\\osx-x64\\bin\\libsdl2Release.a"]
 OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
 
 [Configs.Test.macOS]
-LibPaths = ["$(ProjectDir)\\.build\\osx64_clang\\bin\\libsdl2Release.a"]
+LibPaths = ["$(ProjectDir)\\.build\\osx-x64\\bin\\libsdl2Release.a"]
 OtherLinkFlags = "$(LinkFlags) -framework ForceFeedback -framework Cocoa -framework CoreAudio -framework CoreVideo -framework AudioToolbox -framework AudioUnit -framework IOKit -framework Carbon -framework AudioToolbox -framework CoreServices -framework Metal"
 
 [Configs.Debug.Linux64]

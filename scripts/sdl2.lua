@@ -98,7 +98,7 @@ project "sdl2"
 		"HAVE_LIBC",
 	}
    
-	configuration { "osx" }
+	configuration { "osx*" }
 	buildoptions {
 		"-Wno-objc-method-access",
 		"-Wno-deprecated-declarations",
