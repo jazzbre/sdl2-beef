@@ -21,6 +21,7 @@ namespace example
 				SDL.Event event;
 				while (SDL.PollEvent(out event) != 0)
 				{
+					SDL.Log(scope $"SDL Event {event.type}");
 					switch (event.type)
 					{
 					case .Quit:
