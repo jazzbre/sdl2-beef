@@ -158,6 +158,9 @@ project "sdl2"
    }
    
    configuration { "android*" }
+   defines {
+      "HAVE_GETAUXVAL"
+   }
    files {
       path.join(SOURCE_DIR, "SDL/src/haptic/android/*.c"),
       path.join(SOURCE_DIR, "SDL/src/hidapi/android/*.c*"),
