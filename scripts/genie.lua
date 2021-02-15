@@ -18,7 +18,7 @@ local BUILD_DIR = path.getabsolute("../.build")
 defines {
 }
 
-dofile ("../submodules/bx/scripts/toolchain.lua")
+dofile ("toolchain.lua")
 if not toolchain(BUILD_DIR, SOURCE_DIR) then
 	return -- no action specified
 end
