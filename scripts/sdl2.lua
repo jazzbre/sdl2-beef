@@ -90,6 +90,7 @@ project "sdl2"
       path.join(SOURCE_DIR, "SDL/src/sensor/windows/*.c"),
       path.join(SOURCE_DIR, "SDL/src/timer/windows/*.c"),
       path.join(SOURCE_DIR, "SDL/src/render/direct3d/*.c"),
+      path.join(SOURCE_DIR, "SDL/src/render/direct3d11/*.c"),
       path.join(SOURCE_DIR, "SDL/src/render/opengl/*.c"),
       path.join(SOURCE_DIR, "SDL/src/render/opengles/*.c"),
       path.join(SOURCE_DIR, "SDL/src/render/opengles2/*.c"),
