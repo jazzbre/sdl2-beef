@@ -40,12 +40,12 @@ namespace SDL2
 			case False;
 			case True;
 
-			public static operator Bool (bool val)
+			public static operator Bool(bool val)
 			{
 				return val ? True : False;
 			}
 
-			public static operator bool (Bool val)
+			public static operator bool(Bool val)
 			{
 				return (val == .True) ? true : false;
 			}
@@ -61,7 +61,7 @@ namespace SDL2
 
 		[LinkName("SDL_RWFromFile")]
 		public static extern RWOps* RWFromFile(char8* file, char8* mode);
-		
+
 		/* mem refers to a void*, IntPtr to an SDL_RWops* */
 		[LinkName("SDL_RWFromMem")]
 		public static extern RWOps* RWFromMem(void* mem, int32 size);
@@ -71,20 +71,20 @@ namespace SDL2
 
 		public enum InitFlag : uint32
 		{
-			Timer =				0x00000001,
-			Audio =				0x00000010,
-			Video =				0x00000020,
-			Joystick =			0x00000200,
-			Haptic =			0x00001000,
-			GameController = 	0x00002000,
-			Events =			0x00004000,
-			Sensor =			0x00008000,
-			NoParachute =		0x00100000,
+			Timer = 0x00000001,
+			Audio = 0x00000010,
+			Video = 0x00000020,
+			Joystick = 0x00000200,
+			Haptic = 0x00001000,
+			GameController = 0x00002000,
+			Events = 0x00004000,
+			Sensor = 0x00008000,
+			NoParachute = 0x00100000,
 			Everything = (
 				Timer | Audio | Video |
 				Events | Joystick | Haptic |
 				GameController | Sensor
-			)
+				)
 		}
 
 		[LinkName("SDL_Init")]
@@ -219,7 +219,7 @@ namespace SDL2
 			"SDL_WINDOWS_INTRESOURCE_ICON";
 		public const String SDL_HINT_WINDOWS_INTRESOURCE_ICON_SMALL =
 			"SDL_WINDOWS_INTRESOURCE_ICON_SMALL";
-		
+
 		/* Only available in 2.0.8 or higher */
 		public const String SDL_HINT_IOS_HIDE_HOME_INDICATOR =
 			"SDL_IOS_HIDE_HOME_INDICATOR";
@@ -260,7 +260,7 @@ namespace SDL2
 		[LinkName("SDL_SetHint")]
 		public static extern Bool SetHint(char8* name, char8* value);
 		[LinkName("SDL_SetHintWithPriority")]
-		public static extern Bool SetHintWithPriority( char8* name, char8* value, SDL_HintPriority priority);
+		public static extern Bool SetHintWithPriority(char8* name, char8* value, SDL_HintPriority priority);
 
 		[LinkName("SDL_GetHintBoolean")]
 		public static extern Bool GetHintBoolean(char8* name, Bool default_value);
@@ -326,44 +326,44 @@ namespace SDL2
 			int32 category,
 			LogPriority priority,
 			char8* message
-		);
+			);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_Log")]
-		public static extern void Log(char8* fmtAndArglist);
+		public static extern void Log(char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogVerbose")]
-		public static extern void LogVerbose(int category, char8* fmtAndArglist);
+		public static extern void LogVerbose(int category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogDebug")]
-		public static extern void LogDebug(int32 category, char8* fmtAndArglist);
+		public static extern void LogDebug(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogInfo")]
-		
-		public static extern void LogInfo(int32 category, char8* fmtAndArglist);
+
+		public static extern void LogInfo(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogWarn")]
-		public static extern void LogWarn(int32 category, char8* fmtAndArglist);
+		public static extern void LogWarn(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogError")]
-		public static extern void LogError(int32 category, char8* fmtAndArglist);
+		public static extern void LogError(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogCritical")]
-		public static extern void LogCritical(int32 category, char8* fmtAndArglist);
+		public static extern void LogCritical(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogMessage")]
-		public static extern void LogMessage(int32 category, LogPriority priority, char8* fmtAndArglist);
+		public static extern void LogMessage(int32 category, LogPriority priority, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogMessageV")]
-		public static extern void LogMessageV(int32 category, LogPriority priority, char8* fmtAndArglist);
+		public static extern void LogMessageV(int32 category, LogPriority priority, char8* fmtAndArglist, ...);
 
 		[LinkName("SDL_LogGetPriority")]
 		public static extern LogPriority SDL_LogGetPriority(int32 category);
@@ -382,12 +382,12 @@ namespace SDL2
 
 		[LinkName("SDL_LogSetOutputFunction")]
 		public static extern void LogSetOutputFunction(LogOutputFunction callback, void* userdata);
-		
+
 		public enum MessageBoxFlags : uint32
 		{
-			Error =		0x00000010,
-			Warning =	0x00000020,
-			Information =	0x00000040
+			Error = 0x00000010,
+			Warning = 0x00000020,
+			Information = 0x00000040
 		}
 
 		public enum MessageBoxButtonFlags : uint32
@@ -401,7 +401,7 @@ namespace SDL2
 		{
 			public MessageBoxButtonFlags flags;
 			public int32 buttonid;
-			public char8* text; /* The UTF-8 button text */
+			public char8* text;/* The UTF-8 button text */
 		}
 
 		[CRepr]
@@ -432,12 +432,12 @@ namespace SDL2
 		public struct MessageBoxData
 		{
 			public MessageBoxFlags flags;
-			public Window* window;				/* Parent window, can be NULL */
-			public char8* title;				/* UTF-8 title */
-			public char8* message;				/* UTF-8 message text */
+			public Window* window;/* Parent window, can be NULL */
+			public char8* title;/* UTF-8 title */
+			public char8* message;/* UTF-8 message text */
 			public int numbuttons;
 			public MessageBoxButtonData* buttons;
-			public MessageBoxColorScheme* colorScheme;	/* Can be NULL to use system settings */
+			public MessageBoxColorScheme* colorScheme;/* Can be NULL to use system settings */
 		}
 
 
@@ -450,21 +450,21 @@ namespace SDL2
 			char8* title,
 			char8* message,
 			Window* window
-		);
+			);
 
 		/* Similar to the headers, this is the version we're expecting to be
 		 * running with. You will likely want to check this somewhere in your
 		 * program!
 		 */
-		public const int MAJOR_VERSION =	2;
-		public const int MINOR_VERSION =	0;
-		public const int PATCHLEVEL =	9;
+		public const int MAJOR_VERSION = 2;
+		public const int MINOR_VERSION = 0;
+		public const int PATCHLEVEL = 9;
 
 		public static readonly int COMPILEDVERSION = VERSIONNUM(
 			MAJOR_VERSION,
 			MINOR_VERSION,
 			PATCHLEVEL
-		);
+			);
 
 		[CRepr]
 		public struct Version
@@ -527,23 +527,23 @@ namespace SDL2
 			GL_SHARE_WITH_CURRENT_CONTEXT,
 			GL_FRAMEBUFFER_SRGB_CAPABLE,
 			GL_CONTEXT_RELEASE_BEHAVIOR,
-			GL_CONTEXT_RESET_NOTIFICATION,	/* Only available in 2.0.6 */
-			GL_CONTEXT_NO_ERROR,		/* Only available in 2.0.6 */
+			GL_CONTEXT_RESET_NOTIFICATION,/* Only available in 2.0.6 */
+			GL_CONTEXT_NO_ERROR,/* Only available in 2.0.6 */
 		}
 
 		public enum SDL_GLProfile : uint32
 		{
-			GL_CONTEXT_PROFILE_CORE				= 0x0001,
-			GL_CONTEXT_PROFILE_COMPATIBILITY	= 0x0002,
-			GL_CONTEXT_PROFILE_ES				= 0x0004
+			GL_CONTEXT_PROFILE_CORE = 0x0001,
+			GL_CONTEXT_PROFILE_COMPATIBILITY = 0x0002,
+			GL_CONTEXT_PROFILE_ES = 0x0004
 		}
 
 		public enum SDL_GLContextFlags : uint32
 		{
-			GL_CONTEXT_DEBUG_FLAG				= 0x0001,
-			GL_CONTEXT_FORWARD_COMPATIBLE_FLAG	= 0x0002,
-			GL_CONTEXT_ROBUST_ACCESS_FLAG		= 0x0004,
-			GL_CONTEXT_RESET_ISOLATION_FLAG		= 0x0008
+			GL_CONTEXT_DEBUG_FLAG = 0x0001,
+			GL_CONTEXT_FORWARD_COMPATIBLE_FLAG = 0x0002,
+			GL_CONTEXT_ROBUST_ACCESS_FLAG = 0x0004,
+			GL_CONTEXT_RESET_ISOLATION_FLAG = 0x0008
 		}
 
 		public enum WindowEventID : uint8
@@ -586,35 +586,35 @@ namespace SDL2
 		public enum WindowFlags : uint32
 		{
 			None = 0,
-			Fullscreen =		0x00000001,
-			OpenGL =		0x00000002,
-			Shown =		0x00000004,
-			Hidden =		0x00000008,
-			Borderless =		0x00000010,
-			Resizable =		0x00000020,
-			Minimized =		0x00000040,
-			Maximized =		0x00000080,
-			InputGrabbed =	0x00000100,
-			InputFocus =	0x00000200,
-			MouseFocus =	0x00000400,
+			Fullscreen = 0x00000001,
+			OpenGL = 0x00000002,
+			Shown = 0x00000004,
+			Hidden = 0x00000008,
+			Borderless = 0x00000010,
+			Resizable = 0x00000020,
+			Minimized = 0x00000040,
+			Maximized = 0x00000080,
+			InputGrabbed = 0x00000100,
+			InputFocus = 0x00000200,
+			MouseFocus = 0x00000400,
 			FullscreenDesktop =
-						(Fullscreen | 0x00001000),
-			Foreign =		0x00000800,
-			AllowHighDPI =	0x00002000,	/* Only available in 2.0.1 */
-			MouseCapture =	0x00004000,	/* Only available in 2.0.4 */
-			AlwaysOnTop =	0x00008000,	/* Only available in 2.0.5 */
-			SkipTaskbar =	0x00010000,	/* Only available in 2.0.5 */
-			Utility =		0x00020000,	/* Only available in 2.0.5 */
-			Tooltip =		0x00040000,	/* Only available in 2.0.5 */
-			PopupMenu =		0x00080000,	/* Only available in 2.0.5 */
-			Vulkan =		0x10000000,	/* Only available in 2.0.6 */
+				(Fullscreen | 0x00001000),
+			Foreign = 0x00000800,
+			AllowHighDPI = 0x00002000,/* Only available in 2.0.1 */
+			MouseCapture = 0x00004000,/* Only available in 2.0.4 */
+			AlwaysOnTop = 0x00008000,/* Only available in 2.0.5 */
+			SkipTaskbar = 0x00010000,/* Only available in 2.0.5 */
+			Utility = 0x00020000,/* Only available in 2.0.5 */
+			Tooltip = 0x00040000,/* Only available in 2.0.5 */
+			PopupMenu = 0x00080000,/* Only available in 2.0.5 */
+			Vulkan = 0x10000000,/* Only available in 2.0.6 */
 		}
 
 		/* Only available in 2.0.4 */
 		public enum HitTestResult : uint32
 		{
-			Normal,		    /* Region is normal. No special properties. */
-			Draggable,		/* Region can drag entire window. */
+			Normal,/* Region is normal. No special properties. */
+			Draggable,/* Region can drag entire window. */
 			ResizeTopLeft,
 			ResizeTop,
 			ResizeTopRight,
@@ -638,7 +638,7 @@ namespace SDL2
 			public int32 w;
 			public int32 h;
 			public int32 refresh_rate;
-			public void* driverdata; // void*
+			public void* driverdata;// void*
 		}
 
 		public function HitTestResult SDL_HitTest(Window win, Point* area, void* data);
@@ -653,7 +653,7 @@ namespace SDL2
 			int32 w,
 			int32 h,
 			WindowFlags flags
-		);
+			);
 
 		[LinkName("SDL_CreateWindowAndRenderer")]
 		public static extern int CreateWindowAndRenderer(
@@ -662,13 +662,13 @@ namespace SDL2
 			WindowFlags window_flags,
 			out Window* window,
 			out Renderer* renderer
-		);
+			);
 
 		/* data refers to some native window type, IntPtr to an SDL_Window* */
 		[LinkName("SDL_CreateWindowFrom")]
 		public static extern Window* SDL_CreateWindowFrom(void* data);
 
-		
+
 		[LinkName("SDL_DestroyWindow")]
 		public static extern void DestroyWindow(Window* window);
 
@@ -684,14 +684,14 @@ namespace SDL2
 			int displayIndex,
 			ref SDL_DisplayMode mode,
 			out SDL_DisplayMode closest
-		);
+			);
 
 
 		[LinkName("SDL_GetCurrentDisplayMode")]
 		public static extern int SDL_GetCurrentDisplayMode(
 			int displayIndex,
 			out SDL_DisplayMode mode
-		);
+			);
 
 		[LinkName("SDL_GetCurrentVideoDriver")]
 		public static extern char8* GetCurrentVideoDriver();
@@ -747,7 +747,7 @@ namespace SDL2
 		[LinkName("SDL_SetWindowModalFor")]
 		public static extern int SDL_SetWindowModalFor(Window* modal_window, Window* parent_window);
 
-		
+
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_SetWindowInputFocus")]
 		public static extern int SDL_SetWindowInputFocus(Window* window);
@@ -756,10 +756,10 @@ namespace SDL2
 		[LinkName("SDL_GetWindowData")]
 		public static extern void* SDL_GetWindowData(Window* window, char8* name);
 
-		
+
 		[LinkName("SDL_GetWindowDisplayIndex")]
 		public static extern int SDL_GetWindowDisplayIndex(Window* window);
-		
+
 		[LinkName("SDL_GetWindowDisplayMode")]
 		public static extern int GetWindowDisplayMode(Window* window, out SDL_DisplayMode mode);
 
@@ -768,19 +768,19 @@ namespace SDL2
 
 		[LinkName("SDL_GetWindowFromID")]
 		public static extern Window* GetWindowFromID(uint32 id);
-		
+
 		[LinkName("SDL_GetWindowGammaRamp")]
 		public static extern int32 GetWindowGammaRamp(Window* window, uint16* red, uint16* green, uint16* blue);
-		
+
 		[LinkName("SDL_GetWindowGrab")]
 		public static extern Bool GetWindowGrab(Window* window);
-		
+
 		[LinkName("SDL_GetWindowID")]
 		public static extern uint32 GetWindowID(Window* window);
 
 		[LinkName("SDL_GetWindowPixelFormat")]
 		public static extern uint32 GetWindowPixelFormat(Window* window);
-		
+
 		[LinkName("SDL_GetWindowMaximumSize")]
 		public static extern void GetWindowMaximumSize(Window* window, out int32 max_w, out int32 max_h);
 
@@ -789,19 +789,19 @@ namespace SDL2
 
 		[LinkName("SDL_GetWindowPosition")]
 		public static extern void GetWindowPosition(Window* window, out int32 x, out int32 y);
-		
+
 		[LinkName("SDL_GetWindowSize")]
 		public static extern void GetWindowSize(Window* window, out int32 w, out int32 h);
 
 		[LinkName("SDL_GetWindowSurface")]
 		public static extern Surface* GetWindowSurface(Window* window);
-		
+
 		[LinkName("SDL_GetWindowTitle")]
 		public static extern char8* GetWindowTitle(Window* window);
 
 		public struct Texture;
 
-		
+
 		[LinkName("SDL_GL_BindTexture")]
 		public static extern int32 SDL_GL_BindTexture(Texture* texture, out float texw, out float texh);
 
@@ -864,14 +864,14 @@ namespace SDL2
 
 		[LinkName("SDL_GL_SetSwapInterval")]
 		public static extern int32 GL_SetSwapInterval(int32 interval);
-		
+
 		[LinkName("SDL_GL_SwapWindow")]
 		public static extern void GL_SwapWindow(Window* window);
 
-		
+
 		[LinkName("SDL_GL_UnbindTexture")]
 		public static extern int32 GL_UnbindTexture(Texture* texture);
-		
+
 		[LinkName("SDL_HideWindow")]
 		public static extern void HideWindow(Window* window);
 
@@ -886,10 +886,10 @@ namespace SDL2
 
 		[LinkName("SDL_RaiseWindow")]
 		public static extern void RaiseWindow(Window* window);
-		
+
 		[LinkName("SDL_RestoreWindow")]
 		public static extern void RestoreWindow(Window* window);
-		
+
 		[LinkName("SDL_SetWindowBrightness")]
 		public static extern int32 SetWindowBrightness(Window* window, float brightness);
 
@@ -898,50 +898,50 @@ namespace SDL2
 
 		[LinkName("SDL_SetWindowDisplayMode")]
 		public static extern int32 SetWindowDisplayMode(Window* window, ref SDL_DisplayMode mode);
-		
+
 		[LinkName("SDL_SetWindowFullscreen")]
 		public static extern int32 SetWindowFullscreen(Window* window, uint32 flags);
-		
+
 		[LinkName("SDL_SetWindowGammaRamp")]
 		public static extern int32 SetWindowGammaRamp(Window* window, uint16* red, uint16* green, uint16* blue);
-		
+
 		[LinkName("SDL_SetWindowGrab")]
 		public static extern void SetWindowGrab(Window* window, Bool grabbed);
 
 		[LinkName("SDL_SetWindowIcon")]
 		public static extern void SetWindowIcon(Window* window, Surface* icon);
-		
+
 		[LinkName("SDL_SetWindowMaximumSize")]
 		public static extern void SetWindowMaximumSize(Window* window, int32 max_w, int32 max_h);
 
 		[LinkName("SDL_SetWindowMinimumSize")]
 		public static extern void SetWindowMinimumSize(Window* window, int32 min_w, int32 min_h);
-		
+
 		[LinkName("SDL_SetWindowPosition")]
 		public static extern void SetWindowPosition(Window* window, int32 x, int32 y);
-	
+
 		[LinkName("SDL_SetWindowSize")]
 		public static extern void SetWindowSize(Window* window, int32 w, int32 h);
-		
+
 		[LinkName("SDL_SetWindowBordered")]
 		public static extern void SetWindowBordered(Window* window, Bool bordered);
-		
+
 		[LinkName("SDL_GetWindowBordersSize")]
 		public static extern int32 GetWindowBordersSize(Window* window, out int32 top, out int32 left, out int32 bottom, out int32 right);
-		
+
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_SetWindowResizable")]
 		public static extern void SetWindowResizable(Window* window, Bool resizable);
 
 		[LinkName("SDL_SetWindowTitle")]
 		public static extern void SetWindowTitle(Window* window, char8* title);
-		
+
 		[LinkName("SDL_ShowWindow")]
 		public static extern void ShowWindow(Window* window);
-		
+
 		[LinkName("SDL_UpdateWindowSurface")]
 		public static extern int UpdateWindowSurface(Window* window);
-		
+
 		[LinkName("SDL_UpdateWindowSurfaceRects")]
 		public static extern int UpdateWindowSurfaceRects(Window* window, Rect* rects, int numrects);
 
@@ -962,34 +962,34 @@ namespace SDL2
 
 		public enum BlendMode : uint32
 		{
-			None =	0x00000000,
-			Blend =	0x00000001,
-			Add =	0x00000002,
-			Mod =	0x00000004,
+			None = 0x00000000,
+			Blend = 0x00000001,
+			Add = 0x00000002,
+			Mod = 0x00000004,
 			Invalid = 0x7FFFFFFF
 		}
 
 		public enum BlendOperation : uint32
 		{
-			Add		= 0x1,
+			Add = 0x1,
 			Subtract = 0x2,
-			RevSubtract	= 0x3,
-			Minimum	= 0x4,
-			Maximum	= 0x5
+			RevSubtract = 0x3,
+			Minimum = 0x4,
+			Maximum = 0x5
 		}
 
 		public enum BlendFactor : uint32
 		{
-			Zero				= 0x1,
-			One					= 0x2,
-			Src_Color			= 0x3,
-			OneMinusSrcColor	= 0x4,
-			SrcAlpha	 		= 0x5,
-			OneMinusSrcAlpha	= 0x6,
-			DstColor	 		= 0x7,
-			OneMinusDstColor	= 0x8,
-			DstAlpha	 		= 0x9,
-			OneMinusDstAlpha	= 0xA
+			Zero = 0x1,
+			One = 0x2,
+			Src_Color = 0x3,
+			OneMinusSrcColor = 0x4,
+			SrcAlpha = 0x5,
+			OneMinusSrcAlpha = 0x6,
+			DstColor = 0x7,
+			OneMinusDstColor = 0x8,
+			DstAlpha = 0x9,
+			OneMinusDstAlpha = 0xA
 		}
 
 		/* Only available in 2.0.6 */
@@ -1001,7 +1001,7 @@ namespace SDL2
 			BlendFactor srcAlphaFactor,
 			BlendFactor dstAlphaFactor,
 			BlendOperation alphaOperation
-		);
+			);
 
 		[LinkName("SDL_Vulkan_LoadLibrary")]
 		public static extern int32 Vulkan_LoadLibrary(char8* path);
@@ -1044,17 +1044,17 @@ namespace SDL2
 
 		public enum RendererFlags : uint32
 		{
-			Software =		0x00000001,
-			Accelerated =	0x00000002,
-			PresentVSync =	0x00000004,
-			TargetTexture =	0x00000008
+			Software = 0x00000001,
+			Accelerated = 0x00000002,
+			PresentVSync = 0x00000004,
+			TargetTexture = 0x00000008
 		}
 
 		public enum RendererFlip : uint32
 		{
-			None =		0x00000000,
+			None = 0x00000000,
 			Horizontal = 0x00000001,
-			Vertical =	0x00000002
+			Vertical = 0x00000002
 		}
 
 		public enum TextureAccess : uint32
@@ -1066,15 +1066,15 @@ namespace SDL2
 
 		public enum TextureModulate
 		{
-			None     =		0x00000000,
-			Horizontal =	0x00000001,
-			Vertical =		0x00000002
+			None = 0x00000000,
+			Horizontal = 0x00000001,
+			Vertical = 0x00000002
 		}
 
 		[CRepr]
 		public struct RendererInfo
 		{
-			public char8* name; // const char*
+			public char8* name;// const char*
 			public uint32 flags;
 			public uint32 num_texture_formats;
 			public uint32[16] texture_formats;
@@ -1088,7 +1088,7 @@ namespace SDL2
 			Window* window,
 			int32 index,
 			RendererFlags flags
-		);
+			);
 
 		/* IntPtr refers to an SDL_Renderer*, surface to an SDL_Surface* */
 		[LinkName("SDL_CreateSoftwareRenderer")]
@@ -1101,22 +1101,22 @@ namespace SDL2
 		[LinkName("SDL_CreateTextureFromSurface")]
 		public static extern Texture* CreateTextureFromSurface(Renderer* renderer, Surface* surface);
 
-		
+
 		[LinkName("SDL_DestroyRenderer")]
 		public static extern void DestroyRenderer(Renderer* renderer);
 
-		
+
 		[LinkName("SDL_DestroyTexture")]
 		public static extern void DestroyTexture(Texture* texture);
 
 		[LinkName("SDL_GetNumRenderDrivers")]
 		public static extern int32 GetNumRenderDrivers();
 
-		
+
 		[LinkName("SDL_GetRenderDrawBlendMode")]
 		public static extern int32 GetRenderDrawBlendMode(Renderer* renderer, out BlendMode blendMode);
 
-		
+
 		[LinkName("SDL_GetRenderDrawColor")]
 		public static extern int GetRenderDrawColor(Renderer* renderer, out uint8 r, out uint8 g, out uint8 b, out uint8 a);
 
@@ -1148,9 +1148,9 @@ namespace SDL2
 			Rect* rect,
 			out void* pixels,
 			out int32 pitch
-		);
+			);
 
-		
+
 		[LinkName("SDL_QueryTexture")]
 		public static extern int QueryTexture(
 			Texture* texture,
@@ -1158,9 +1158,9 @@ namespace SDL2
 			out int32 access,
 			out int32 w,
 			out int32 h
-		);
+			);
 
-		
+
 		[LinkName("SDL_RenderClear")]
 		public static extern int RenderClear(Renderer* renderer);
 
@@ -1170,7 +1170,7 @@ namespace SDL2
 			Texture* texture,
 			Rect* srcrect,
 			Rect* dstrect
-		);
+			);
 
 		[LinkName("SDL_RenderCopyEx")]
 		public static extern int RenderCopyEx(
@@ -1181,7 +1181,7 @@ namespace SDL2
 			double angle,
 			Point* center,
 			RendererFlip flip
-		);
+			);
 
 		[LinkName("SDL_RenderDrawLine")]
 		public static extern int RenderDrawLine(
@@ -1190,85 +1190,85 @@ namespace SDL2
 			int32 y1,
 			int32 x2,
 			int32 y2
-		);
-		
+			);
+
 		[LinkName("SDL_RenderDrawLines")]
 		public static extern int RenderDrawLines(
 			Renderer* renderer,
 			Point* points,
 			int32 count
-		);
-	
+			);
+
 		[LinkName("SDL_RenderDrawPoint")]
 		public static extern int RenderDrawPoint(
 			Renderer* renderer,
 			int32 x,
 			int32 y
-		);
-		
+			);
+
 		[LinkName("SDL_RenderDrawPoints")]
 		public static extern int RenderDrawPoints(
 			Renderer* renderer,
 			Point** points,
 			int32 count
-		);
-	
+			);
+
 		[LinkName("SDL_RenderDrawRect")]
 		public static extern int RenderDrawRect(
 			Renderer* renderer,
 			Rect* rect
-		);
-		
+			);
+
 		[LinkName("SDL_RenderDrawRects")]
 		public static extern int RenderDrawRects(
 			Renderer* renderer,
 			Rect** rects,
 			int32 count
-		);
+			);
 
 		[LinkName("SDL_RenderFillRect")]
 		public static extern int RenderFillRect(
 			Renderer* renderer,
 			Rect* rect
-		);
-		
+			);
+
 		[LinkName("SDL_RenderFillRects")]
 		public static extern int RenderFillRects(
 			Renderer* renderer,
 			Rect** rects,
 			int32 count
-		);
-		
+			);
+
 		[LinkName("SDL_RenderGetClipRect")]
 		public static extern void RenderGetClipRect(
 			Renderer* renderer,
 			out Rect rect
-		);
-		
+			);
+
 		[LinkName("SDL_RenderGetLogicalSize")]
 		public static extern void RenderGetLogicalSize(
 			Renderer* renderer,
 			out int32 w,
 			out int32 h
-		);
+			);
 
-		
+
 		[LinkName("SDL_RenderGetScale")]
 		public static extern void RenderGetScale(
 			Renderer* renderer,
 			out float scaleX,
 			out float scaleY
-		);
-		
+			);
+
 		[LinkName("SDL_RenderGetViewport")]
 		public static extern int RenderGetViewport(
 			Renderer* renderer,
 			out Rect rect
-		);
-		
+			);
+
 		[LinkName("SDL_RenderPresent")]
 		public static extern void RenderPresent(Renderer* renderer);
-		
+
 		[LinkName("SDL_RenderReadPixels")]
 		public static extern int RenderReadPixels(
 			Renderer* renderer,
@@ -1276,50 +1276,50 @@ namespace SDL2
 			uint32 format,
 			void* pixels,
 			int32 pitch
-		);
-		
+			);
+
 		[LinkName("SDL_RenderSetClipRect")]
 		public static extern int RenderSetClipRect(
 			Renderer* renderer,
 			Rect* rect
-		);
-		
+			);
+
 		[LinkName("SDL_RenderSetLogicalSize")]
 		public static extern int RenderSetLogicalSize(
 			Renderer* renderer,
 			int32 w,
 			int32 h
-		);
-		
+			);
+
 		[LinkName("SDL_RenderSetScale")]
 		public static extern int RenderSetScale(
 			Renderer* renderer,
 			float scaleX,
 			float scaleY
-		);
+			);
 
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_RenderSetIntegerScale")]
 		public static extern int RenderSetIntegerScale(
 			Renderer* renderer,
 			Bool enable
-		);
+			);
 
-		
+
 		[LinkName("SDL_RenderSetViewport")]
 		public static extern int RenderSetViewport(
 			Renderer* renderer,
 			Rect* rect
-		);
+			);
 
-		
+
 		[LinkName("SDL_SetRenderDrawBlendMode")]
 		public static extern int SetRenderDrawBlendMode(
 			Renderer* renderer,
 			BlendMode blendMode
-		);
+			);
 
-		
+
 		[LinkName("SDL_SetRenderDrawColor")]
 		public static extern int SetRenderDrawColor(
 			Renderer* renderer,
@@ -1327,52 +1327,52 @@ namespace SDL2
 			uint8 g,
 			uint8 b,
 			uint8 a
-		);
+			);
 
 		[LinkName("SDL_SetRenderTarget")]
 		public static extern int SetRenderTarget(
 			Renderer* renderer,
 			Texture* texture
-		);
-		
+			);
+
 		[LinkName("SDL_SetTextureAlphaMod")]
 		public static extern int SetTextureAlphaMod(
 			Texture* texture,
 			uint8 alpha
-		);
-		
+			);
+
 		[LinkName("SDL_SetTextureBlendMode")]
 		public static extern int SetTextureBlendMode(
 			Texture* texture,
 			BlendMode blendMode
-		);
-		
+			);
+
 		[LinkName("SDL_SetTextureColorMod")]
 		public static extern int SetTextureColorMod(
 			Texture* texture,
 			uint8 r,
 			uint8 g,
 			uint8 b
-		);
-		
+			);
+
 		[LinkName("SDL_UnlockTexture")]
 		public static extern void UnlockTexture(Texture* texture);
-		
+
 		[LinkName("SDL_UpdateTexture")]
 		public static extern int UpdateTexture(
 			Texture* texture,
 			Rect* rect,
 			void* pixels,
 			int pitch
-		);
-		
+			);
+
 		[LinkName("SDL_UpdateTexture")]
 		public static extern int UpdateTexture(
 			Texture* texture,
 			Rect* rect,
 			void* pixels,
 			int32 pitch
-		);
+			);
 
 		/* Available in 2.0.1 or higher */
 		[LinkName("SDL_UpdateYUVTexture")]
@@ -1385,27 +1385,27 @@ namespace SDL2
 			int32 uPitch,
 			uint8* vPlane,
 			int32 vPitch
-		);
-		
+			);
+
 		[LinkName("SDL_RenderTargetSupported")]
 		public static extern Bool RenderTargetSupported(
 			Renderer* renderer
-		);
+			);
 
 		[LinkName("SDL_GetRenderTarget")]
 		public static extern Texture* GetRenderTarget(Renderer* renderer);
-		
+
 		/* Available in 2.0.8 or higher */
 		[LinkName("SDL_RenderGetMetalLayer")]
 		public static extern void* RenderGetMetalLayer(
 			Renderer* renderer
-		);
-		
+			);
+
 		/* Available in 2.0.8 or higher */
 		[LinkName("SDL_RenderGetMetalCommandEncoder")]
 		public static extern void* RenderGetMetalCommandEncoder(
 			Renderer* renderer
-		);
+			);
 
 		/* Only available in 2.0.4 */
 		[LinkName("SDL_RenderIsClipEnabled")]
@@ -1422,55 +1422,56 @@ namespace SDL2
 			SDL_PACKEDLAYOUT_ENUM layout,
 			uint8 bits,
 			uint8 bytes
-		) {
-			return (uint32) (
+			)
+		{
+			return (uint32)(
 				(1 << 28) |
-				(((uint32) type) << 24) |
-				(((uint32) order) << 20) |
-				(((uint32) layout) << 16) |
+				(((uint32)type) << 24) |
+				(((uint32)order) << 20) |
+				(((uint32)layout) << 16) |
 				((uint32)bits << 8) |
 				(bytes)
-			);
+				);
 		}
 
 		public static uint8 SDL_PIXELFLAG(uint32 X)
 		{
-			return (uint8) ((X >> 28) & 0x0F);
+			return (uint8)((X >> 28) & 0x0F);
 		}
 
 		public static uint8 SDL_PIXELTYPE(uint32 X)
 		{
-			return (uint8) ((X >> 24) & 0x0F);
+			return (uint8)((X >> 24) & 0x0F);
 		}
 
 		public static uint8 SDL_PIXELORDER(uint32 X)
 		{
-			return (uint8) ((X >> 20) & 0x0F);
+			return (uint8)((X >> 20) & 0x0F);
 		}
 
 		public static uint8 SDL_PIXELLAYOUT(uint32 X)
 		{
-			return (uint8) ((X >> 16) & 0x0F);
+			return (uint8)((X >> 16) & 0x0F);
 		}
 
 		public static uint8 SDL_BITSPERPIXEL(uint32 X)
 		{
-			return (uint8) ((X >> 8) & 0xFF);
+			return (uint8)((X >> 8) & 0xFF);
 		}
 
 		public static uint8 SDL_BYTESPERPIXEL(uint32 X)
 		{
 			if (ISPIXELFORMAT_FOURCC(X))
 			{
-				if (	(X == PIXELFORMAT_YUY2) ||
-						(X == PIXELFORMAT_UYVY) ||
-						(X == PIXELFORMAT_YVYU)	)
+				if ((X == PIXELFORMAT_YUY2) ||
+					(X == PIXELFORMAT_UYVY) ||
+					(X == PIXELFORMAT_YVYU))
 				{
 					return 2;
 				}
 				return 1;
 			}
-			return (uint8) (X & 0xFF);
+			return (uint8)(X & 0xFF);
 		}
 
 		public static Bool ISPIXELFORMAT_INDEXED(uint32 format)
@@ -1480,12 +1481,12 @@ namespace SDL2
 				return false;
 			}
 			SDL_PIXELTYPE_ENUM pType =
-					(SDL_PIXELTYPE_ENUM) SDL_PIXELTYPE(format);
+				(SDL_PIXELTYPE_ENUM)SDL_PIXELTYPE(format);
 			return (
 				pType == .Index1 ||
 				pType == .Index4 ||
 				pType == .Index8
-			);
+				);
 		}
 
 		public static Bool ISPIXELFORMAT_ALPHA(uint32 format)
@@ -1495,13 +1496,13 @@ namespace SDL2
 				return false;
 			}
 			SDL_PIXELORDER_ENUM pOrder =
-					(SDL_PIXELORDER_ENUM) SDL_PIXELORDER(format);
+				(SDL_PIXELORDER_ENUM)SDL_PIXELORDER(format);
 			return (
 				pOrder == .PackedOrderARGB ||
 				pOrder == .PackedOrderRGBA ||
 				pOrder == .PackedOrderABGR ||
 				pOrder == .PackedOrderBGRA
-			);
+				);
 		}
 
 		public static Bool ISPIXELFORMAT_FOURCC(uint32 format)
@@ -1568,233 +1569,233 @@ namespace SDL2
 		public static readonly uint32 PIXELFORMAT_UNKNOWN = 0;
 		public static readonly uint32 PIXELFORMAT_INDEX1LSB =
 			DEFINE_PIXELFORMAT(
-				.Index1,
-				.BitmapOrder4321,
-				.LayoutNONE,
-				1, 0
+			.Index1,
+			.BitmapOrder4321,
+			.LayoutNONE,
+			1, 0
 			);
 		public static readonly uint32 PIXELFORMAT_INDEX1MSB =
 			DEFINE_PIXELFORMAT(
-				.Index1,
-				.BitmapOrder1234,
-				.LayoutNONE,
-				1, 0
+			.Index1,
+			.BitmapOrder1234,
+			.LayoutNONE,
+			1, 0
 			);
 		public static readonly uint32 PIXELFORMAT_INDEX4LSB =
 			DEFINE_PIXELFORMAT(
-				.Index4,
-				.BitmapOrder4321,
-				.LayoutNONE,
-				4, 0
+			.Index4,
+			.BitmapOrder4321,
+			.LayoutNONE,
+			4, 0
 			);
 		public static readonly uint32 PIXELFORMAT_INDEX4MSB =
 			DEFINE_PIXELFORMAT(
-				.Index4,
-				.BitmapOrder1234,
-				.LayoutNONE,
-				4, 0
+			.Index4,
+			.BitmapOrder1234,
+			.LayoutNONE,
+			4, 0
 			);
 		public static readonly uint32 PIXELFORMAT_INDEX8 =
 			DEFINE_PIXELFORMAT(
-				.Index8,
-				.ArrayOrderNONE,
-				.LayoutNONE,
-				8, 1
+			.Index8,
+			.ArrayOrderNONE,
+			.LayoutNONE,
+			8, 1
 			);
 		public static readonly uint32 PIXELFORMAT_RGB332 =
 			DEFINE_PIXELFORMAT(
-				.Packed8,
-				.PackedOrderXRGB,
-				.Layout332,
-				8, 1
+			.Packed8,
+			.PackedOrderXRGB,
+			.Layout332,
+			8, 1
 			);
 		public static readonly uint32 PIXELFORMAT_RGB444 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderXRGB,
-				.Layout4444,
-				12, 2
+			.Packed16,
+			.PackedOrderXRGB,
+			.Layout4444,
+			12, 2
 			);
 		public static readonly uint32 PIXELFORMAT_RGB555 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderXRGB,
-				.Layout1555,
-				15, 2
+			.Packed16,
+			.PackedOrderXRGB,
+			.Layout1555,
+			15, 2
 			);
 		public static readonly uint32 PIXELFORMAT_BGR555 =
 			DEFINE_PIXELFORMAT(
-				.Index1,
-				.BitmapOrder4321,
-				.Layout1555,
-				15, 2
+			.Index1,
+			.BitmapOrder4321,
+			.Layout1555,
+			15, 2
 			);
 		public static readonly uint32 PIXELFORMAT_ARGB4444 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderARGB,
-				.Layout4444,
-				16, 2
+			.Packed16,
+			.PackedOrderARGB,
+			.Layout4444,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_RGBA4444 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderRGBA,
-				.Layout4444,
-				16, 2
+			.Packed16,
+			.PackedOrderRGBA,
+			.Layout4444,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_ABGR4444 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderABGR,
-				.Layout4444,
-				16, 2
+			.Packed16,
+			.PackedOrderABGR,
+			.Layout4444,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_BGRA4444 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderBGRA,
-				.Layout4444,
-				16, 2
+			.Packed16,
+			.PackedOrderBGRA,
+			.Layout4444,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_ARGB1555 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderARGB,
-				.Layout1555,
-				16, 2
+			.Packed16,
+			.PackedOrderARGB,
+			.Layout1555,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_RGBA5551 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderRGBA,
-				.Layout5551,
-				16, 2
+			.Packed16,
+			.PackedOrderRGBA,
+			.Layout5551,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_ABGR1555 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderABGR,
-				.Layout1555,
-				16, 2
+			.Packed16,
+			.PackedOrderABGR,
+			.Layout1555,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_BGRA5551 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderBGRA,
-				.Layout5551,
-				16, 2
+			.Packed16,
+			.PackedOrderBGRA,
+			.Layout5551,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_RGB565 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderXRGB,
-				.Layout565,
-				16, 2
+			.Packed16,
+			.PackedOrderXRGB,
+			.Layout565,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_BGR565 =
 			DEFINE_PIXELFORMAT(
-				.Packed16,
-				.PackedOrderXBGR,
-				.Layout565,
-				16, 2
+			.Packed16,
+			.PackedOrderXBGR,
+			.Layout565,
+			16, 2
 			);
 		public static readonly uint32 PIXELFORMAT_RGB24 =
 			DEFINE_PIXELFORMAT(
-				.ArrayU8,
-				.ArrayOrderRGB,
-				.LayoutNONE,
-				24, 3
+			.ArrayU8,
+			.ArrayOrderRGB,
+			.LayoutNONE,
+			24, 3
 			);
 		public static readonly uint32 PIXELFORMAT_BGR24 =
 			DEFINE_PIXELFORMAT(
-				.ArrayU8,
-				.ArrayOrderBGR,
-				.LayoutNONE,
-				24, 3
+			.ArrayU8,
+			.ArrayOrderBGR,
+			.LayoutNONE,
+			24, 3
 			);
 		public static readonly uint32 PIXELFORMAT_RGB888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderXRGB,
-				.Layout8888,
-				24, 4
+			.Packed32,
+			.PackedOrderXRGB,
+			.Layout8888,
+			24, 4
 			);
 		public static readonly uint32 PIXELFORMAT_RGBX8888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderRGBX,
-				.Layout8888,
-				24, 4
+			.Packed32,
+			.PackedOrderRGBX,
+			.Layout8888,
+			24, 4
 			);
 		public static readonly uint32 PIXELFORMAT_BGR888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderXBGR,
-				.Layout8888,
-				24, 4
+			.Packed32,
+			.PackedOrderXBGR,
+			.Layout8888,
+			24, 4
 			);
 		public static readonly uint32 PIXELFORMAT_BGRX8888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderBGRX,
-				.Layout8888,
-				24, 4
+			.Packed32,
+			.PackedOrderBGRX,
+			.Layout8888,
+			24, 4
 			);
 		public static readonly uint32 PIXELFORMAT_ARGB8888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderARGB,
-				.Layout8888,
-				32, 4
+			.Packed32,
+			.PackedOrderARGB,
+			.Layout8888,
+			32, 4
 			);
 		public static readonly uint32 PIXELFORMAT_RGBA8888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderRGBA,
-				.Layout8888,
-				32, 4
+			.Packed32,
+			.PackedOrderRGBA,
+			.Layout8888,
+			32, 4
 			);
 		public static readonly uint32 PIXELFORMAT_ABGR8888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderABGR,
-				.Layout8888,
-				32, 4
+			.Packed32,
+			.PackedOrderABGR,
+			.Layout8888,
+			32, 4
 			);
 		public static readonly uint32 PIXELFORMAT_BGRA8888 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderBGRA,
-				.Layout8888,
-				32, 4
+			.Packed32,
+			.PackedOrderBGRA,
+			.Layout8888,
+			32, 4
 			);
 		public static readonly uint32 PIXELFORMAT_ARGB2101010 =
 			DEFINE_PIXELFORMAT(
-				.Packed32,
-				.PackedOrderARGB,
-				.Layout2101010,
-				32, 4
+			.Packed32,
+			.PackedOrderARGB,
+			.Layout2101010,
+			32, 4
 			);
 		public static readonly uint32 PIXELFORMAT_YV12 =
 			DEFINE_PIXELFOURCC(
-				(uint8) 'Y', (uint8) 'V', (uint8) '1', (uint8) '2'
+			(uint8)'Y', (uint8)'V', (uint8)'1', (uint8)'2'
 			);
 		public static readonly uint32 PIXELFORMAT_IYUV =
 			DEFINE_PIXELFOURCC(
-				(uint8) 'I', (uint8) 'Y', (uint8) 'U', (uint8) 'V'
+			(uint8)'I', (uint8)'Y', (uint8)'U', (uint8)'V'
 			);
 		public static readonly uint32 PIXELFORMAT_YUY2 =
 			DEFINE_PIXELFOURCC(
-				(uint8) 'Y', (uint8) 'U', (uint8) 'Y', (uint8) '2'
+			(uint8)'Y', (uint8)'U', (uint8)'Y', (uint8)'2'
 			);
 		public static readonly uint32 PIXELFORMAT_UYVY =
 			DEFINE_PIXELFOURCC(
-				(uint8) 'U', (uint8) 'Y', (uint8) 'V', (uint8) 'Y'
+			(uint8)'U', (uint8)'Y', (uint8)'V', (uint8)'Y'
 			);
 		public static readonly uint32 PIXELFORMAT_YVYU =
 			DEFINE_PIXELFOURCC(
-				(uint8) 'Y', (uint8) 'V', (uint8) 'Y', (uint8) 'U'
+			(uint8)'Y', (uint8)'V', (uint8)'Y', (uint8)'U'
 			);
 
 		[CRepr]
@@ -1832,7 +1833,7 @@ namespace SDL2
 		public struct PixelFormat
 		{
 			public uint32 format;
-			public Palette* palette; // SDL_Palette*
+			public Palette* palette;// SDL_Palette*
 			public uint8 bitsPerPixel;
 			public uint8 bytesPerPixel;
 			public uint32 Rmask;
@@ -1848,7 +1849,7 @@ namespace SDL2
 			public uint8 bshift;
 			public uint8 Ashift;
 			public int32 refcount;
-			public PixelFormat* next; // SDL_PixelFormat*
+			public PixelFormat* next;// SDL_PixelFormat*
 		}
 
 		/* IntPtr refers to an SDL_PixelFormat* */
@@ -1863,7 +1864,7 @@ namespace SDL2
 		public static extern void CalculateGammaRamp(
 			float gamma,
 			uint16* ramp
-		);
+			);
 
 		/* format refers to an SDL_PixelFormat* */
 		[LinkName("SDL_FreeFormat")]
@@ -1884,7 +1885,7 @@ namespace SDL2
 			out uint8 r,
 			out uint8 g,
 			out uint8 b
-		);
+			);
 
 		/* format refers to an SDL_PixelFormat* */
 		[LinkName("SDL_GetRGBA")]
@@ -1895,7 +1896,7 @@ namespace SDL2
 			out uint8 g,
 			out uint8 b,
 			out uint8 a
-		);
+			);
 
 		/* format refers to an SDL_PixelFormat* */
 		[LinkName("SDL_MapRGB")]
@@ -1904,7 +1905,7 @@ namespace SDL2
 			uint8 r,
 			uint8 g,
 			uint8 b
-		);
+			);
 
 		/* format refers to an SDL_PixelFormat* */
 		[LinkName("SDL_MapRGBA")]
@@ -1914,7 +1915,7 @@ namespace SDL2
 			uint8 g,
 			uint8 b,
 			uint8 a
-		);
+			);
 
 		[LinkName("SDL_MasksToPixelFormatEnum")]
 		public static extern uint32 MasksToPixelFormatEnum(
@@ -1923,7 +1924,7 @@ namespace SDL2
 			uint32 Gmask,
 			uint32 Bmask,
 			uint32 Amask
-		);
+			);
 
 		[LinkName("SDL_PixelFormatEnumToMasks")]
 		public static extern Bool PixelFormatEnumToMasks(
@@ -1933,7 +1934,7 @@ namespace SDL2
 			out uint32 Gmask,
 			out uint32 Bmask,
 			out uint32 Amask
-		);
+			);
 
 		/* palette refers to an SDL_Palette* */
 		[LinkName("SDL_SetPaletteColors")]
@@ -1942,14 +1943,14 @@ namespace SDL2
 			Color* colors,
 			int32 firstcolor,
 			int32 ncolors
-		);
+			);
 
 		/* format and palette refer to an SDL_PixelFormat* and SDL_Palette* */
 		[LinkName("SDL_SetPixelFormatPalette")]
 		public static extern int SetPixelFormatPalette(
 			PixelFormat* format,
 			Palette* palette
-		);
+			);
 
 		[CRepr]
 		public struct Point
@@ -2000,10 +2001,10 @@ namespace SDL2
 		/* Only available in 2.0.4 */
 		public static Bool PointInRect(Point* p, Rect* r)
 		{
-			return (	(p.x >= r.x) &&
-					(p.x < (r.x + r.w)) &&
-					(p.y >= r.y) &&
-					(p.y < (r.y + r.h))	) ?
+			return ((p.x >= r.x) &&
+				(p.x < (r.x + r.w)) &&
+				(p.y >= r.y) &&
+				(p.y < (r.y + r.h))) ?
 				Bool.True :
 				Bool.False;
 		}
@@ -2014,20 +2015,20 @@ namespace SDL2
 			int32 count,
 			Rect* clip,
 			out Rect result
-		);
+			);
 
 		[LinkName("SDL_HasIntersection")]
 		public static extern Bool HasIntersection(
 			Rect* A,
 			Rect* B
-		);
+			);
 
 		[LinkName("SDL_IntersectRect")]
 		public static extern Bool IntersectRect(
 			Rect* A,
 			Rect* B,
 			out Rect result
-		);
+			);
 
 		[LinkName("SDL_IntersectRectAndLine")]
 		public static extern Bool IntersectRectAndLine(
@@ -2036,7 +2037,7 @@ namespace SDL2
 			int32* Y1,
 			int32* X2,
 			int32* Y2
-		);
+			);
 
 		public static Bool RectEmpty(Rect* r)
 		{
@@ -2048,11 +2049,12 @@ namespace SDL2
 		public static Bool RectEquals(
 			Rect* a,
 			Rect* b
-		) {
-			return (	(a.x == b.x) &&
-					(a.y == b.y) &&
-					(a.w == b.w) &&
-					(a.h == b.h)	) ?
+			)
+		{
+			return ((a.x == b.x) &&
+				(a.y == b.y) &&
+				(a.w == b.w) &&
+				(a.h == b.h)) ?
 				Bool.True :
 				Bool.False;
 		}
@@ -2062,12 +2064,12 @@ namespace SDL2
 			Rect* A,
 			Rect* B,
 			out Rect result
-		);
+			);
 
-		public const uint32 SDL_SWSURFACE =	0x00000000;
-		public const uint32 SDL_PREALLOC =	0x00000001;
-		public const uint32 SDL_RLEACCEL =	0x00000002;
-		public const uint32 SDL_DONTFREE =	0x00000004;
+		public const uint32 SDL_SWSURFACE = 0x00000000;
+		public const uint32 SDL_PREALLOC = 0x00000001;
+		public const uint32 SDL_RLEACCEL = 0x00000002;
+		public const uint32 SDL_DONTFREE = 0x00000004;
 
 		public struct SDL_BlitMap;
 
@@ -2075,16 +2077,16 @@ namespace SDL2
 		public struct Surface
 		{
 			public uint32 flags;
-			public PixelFormat* format; // SDL_PixelFormat*
+			public PixelFormat* format;// SDL_PixelFormat*
 			public int32 w;
 			public int32 h;
 			public int32 pitch;
-			public void* pixels; // void*
-			public void* userdata; // void*
+			public void* pixels;// void*
+			public void* userdata;// void*
 			public int32 locked;
-			public void* lock_data; // void*
+			public void* lock_data;// void*
 			public Rect clip_rect;
-			public SDL_BlitMap* map; // SDL_BlitMap*
+			public SDL_BlitMap* map;// SDL_BlitMap*
 			public int refcount;
 		}
 
@@ -2106,7 +2108,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_UpperBlitScaled")]
@@ -2115,7 +2117,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* src and dst are void* pointers */
 		[LinkName("SDL_ConvertPixels")]
@@ -2128,7 +2130,7 @@ namespace SDL2
 			uint32 dst_format,
 			void* dst,
 			int32 dst_pitch
-		);
+			);
 
 		/* IntPtr refers to an SDL_Surface*
 		 * src refers to an SDL_Surface*
@@ -2139,7 +2141,7 @@ namespace SDL2
 			Surface* src,
 			PixelFormat* fmt,
 			uint32 flags
-		);
+			);
 
 		/* IntPtr refers to an SDL_Surface*, src to an SDL_Surface* */
 		[LinkName("SDL_ConvertSurfaceFormat")]
@@ -2147,7 +2149,7 @@ namespace SDL2
 			Surface* src,
 			uint32 pixel_format,
 			uint32 flags
-		);
+			);
 
 		/* IntPtr refers to an SDL_Surface* */
 		[LinkName("SDL_CreateRGBSurface")]
@@ -2160,7 +2162,7 @@ namespace SDL2
 			uint32 Gmask,
 			uint32 Bmask,
 			uint32 Amask
-		);
+			);
 
 		/* IntPtr refers to an SDL_Surface*, pixels to a void* */
 		[LinkName("SDL_CreateRGBSurfaceFrom")]
@@ -2174,7 +2176,7 @@ namespace SDL2
 			uint32 Gmask,
 			uint32 Bmask,
 			uint32 Amask
-		);
+			);
 
 		/* IntPtr refers to an SDL_Surface* */
 		/* Available in 2.0.5 or higher */
@@ -2185,7 +2187,7 @@ namespace SDL2
 			int32 height,
 			int32 depth,
 			uint32 format
-		);
+			);
 
 		/* IntPtr refers to an SDL_Surface*, pixels to a void* */
 		/* Available in 2.0.5 or higher */
@@ -2197,7 +2199,7 @@ namespace SDL2
 			int32 depth,
 			int32 pitch,
 			uint32 format
-		);
+			);
 
 		/* dst refers to an SDL_Surface* */
 		[LinkName("SDL_FillRect")]
@@ -2205,7 +2207,7 @@ namespace SDL2
 			Surface* dst,
 			Rect* rect,
 			uint32 color
-		);
+			);
 
 		/* dst refers to an SDL_Surface* */
 		[LinkName("SDL_FillRects")]
@@ -2214,7 +2216,7 @@ namespace SDL2
 			Rect* rects,
 			int32 count,
 			uint32 color
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_FreeSurface")]
@@ -2225,7 +2227,7 @@ namespace SDL2
 		public static extern void GetClipRect(
 			Surface* surface,
 			out Rect rect
-		);
+			);
 
 		/* surface refers to an SDL_Surface*.
 		 * This function is only available in 2.0.9 or higher.
@@ -2238,21 +2240,21 @@ namespace SDL2
 		public static extern int GetColorKey(
 			Surface* surface,
 			out uint32 key
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetSurfaceAlphaMod")]
 		public static extern int GetSurfaceAlphaMod(
 			Surface* surface,
 			out uint8 alpha
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetSurfaceBlendMode")]
 		public static extern int GetSurfaceBlendMode(
 			Surface* surface,
 			out BlendMode blendMode
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetSurfaceColorMod")]
@@ -2261,13 +2263,13 @@ namespace SDL2
 			out uint8 r,
 			out uint8 g,
 			out uint8 b
-		);
+			);
 
 		[LinkName("SDL_LoadBMP_RW")]
 		private static extern Surface* LoadBMP_RW(
 			RWOps* src,
 			int freesrc
-		);
+			);
 
 		public static Surface* SDL_LoadBMP(char8* file)
 		{
@@ -2286,7 +2288,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_LowerBlitScaled")]
@@ -2295,7 +2297,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* These are for SDL_SaveBMP, which is a macro in the SDL headers. */
 		/* IntPtr refers to an SDL_Surface* */
@@ -2305,7 +2307,7 @@ namespace SDL2
 			Surface* surface,
 			RWOps* dst,
 			int freedst
-		);
+			);
 
 		public static int SDL_SaveBMP(Surface* surface, char8* file)
 		{
@@ -2318,7 +2320,7 @@ namespace SDL2
 		public static extern Bool SetClipRect(
 			Surface* surface,
 			Rect* rect
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetColorKey")]
@@ -2326,21 +2328,21 @@ namespace SDL2
 			Surface* surface,
 			int32 flag,
 			uint32 key
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceAlphaMod")]
 		public static extern int SetSurfaceAlphaMod(
 			Surface* surface,
 			uint8 alpha
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceBlendMode")]
 		public static extern int SetSurfaceBlendMode(
 			Surface* surface,
 			BlendMode blendMode
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceColorMod")]
@@ -2349,21 +2351,21 @@ namespace SDL2
 			uint8 r,
 			uint8 g,
 			uint8 b
-		);
+			);
 
 		/* surface refers to an SDL_Surface*, palette to an SDL_Palette* */
 		[LinkName("SDL_SetSurfacePalette")]
 		public static extern int SetSurfacePalette(
 			Surface* surface,
 			Palette* palette
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceRLE")]
 		public static extern int SetSurfaceRLE(
 			Surface* surface,
 			int32 flag
-		);
+			);
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_SoftStretch")]
@@ -2372,7 +2374,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_UnlockSurface")]
@@ -2385,7 +2387,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_UpperBlitScaled")]
@@ -2394,7 +2396,7 @@ namespace SDL2
 			Rect* srcrect,
 			Surface* dst,
 			Rect* dstrect
-		);
+			);
 
 		/* surface and IntPtr refer to an SDL_Surface* */
 		[LinkName("SDL_DuplicateSurface")]
@@ -2408,11 +2410,11 @@ namespace SDL2
 
 		[LinkName("SDL_SetClipboardText")]
 		public static extern int32 SetClipboardText(char8* text
-		);
+			);
 
 		/* General keyboard/mouse state definitions. */
-		public const uint8 SDL_PRESSED =		1;
-		public const uint8 SDL_RELEASED =	0;
+		public const uint8 SDL_PRESSED = 1;
+		public const uint8 SDL_RELEASED = 0;
 
 		/* Default size is according to SDL2 default. */
 		public const int32 TEXTEDITINGEVENT_TEXT_SIZE = 32;
@@ -2421,10 +2423,10 @@ namespace SDL2
 		/* The types of events that can be delivered. */
 		public enum EventType : uint32
 		{
-			FIRSTEVENT =		0,
+			FIRSTEVENT = 0,
 
 			/* application events */
-			Quit = 			0x100,
+			Quit = 0x100,
 
 			/* ios/android/winrt app events */
 			AppTerminating,
@@ -2436,27 +2438,27 @@ namespace SDL2
 
 			/* display events */
 			/* only available in sdl 2.0.9 or higher */
-			DisplayEvent =		0x150,
+			DisplayEvent = 0x150,
 
 			/* window events */
-			WindowEvent = 		0x200,
+			WindowEvent = 0x200,
 			SysWMEvent,
 
 			/* keyboard events */
-			KeyDown = 			0x300,
+			KeyDown = 0x300,
 			KeyUp,
 			TextEditing,
 			TextInput,
 			KeyMapChanged,
 
 			/* mouse events */
-			MouseMotion = 		0x400,
+			MouseMotion = 0x400,
 			MouseButtonDown,
 			MouseButtonUp,
 			MouseWheel,
 
 			/* joystick events */
-			JoyAxisMotion =		0x600,
+			JoyAxisMotion = 0x600,
 			JoyBallMotion,
 			JoyHatMotion,
 			JoyButtonDown,
@@ -2465,7 +2467,7 @@ namespace SDL2
 			JoyDeviceRemoved,
 
 			/* game controller events */
-			ControllerAxismotion = 	0x650,
+			ControllerAxismotion = 0x650,
 			ControllerButtondown,
 			ControllerButtonup,
 			ControllerDeviceadded,
@@ -2473,20 +2475,20 @@ namespace SDL2
 			ControllerDeviceremapped,
 
 			/* touch events */
-			FingerDown = 		0x700,
+			FingerDown = 0x700,
 			FingerUp,
 			FingerMotion,
 
 			/* gesture events */
-			DollarGesture =		0x800,
+			DollarGesture = 0x800,
 			DollarRecord,
 			MultiGesture,
 
 			/* clipboard events */
-			ClipboardUpdate =		0x900,
+			ClipboardUpdate = 0x900,
 
 			/* drag and drop events */
-			DropFile =			0x1000,
+			DropFile = 0x1000,
 			/* only available in 2.0.4 or higher */
 			DropText,
 			DropBegin,
@@ -2494,16 +2496,16 @@ namespace SDL2
 
 			/* audio hotplug events */
 			/* only available in sdl 2.0.4 or higher */
-			AudioDeviceAdded =		0x1100,
+			AudioDeviceAdded = 0x1100,
 			AudioDeviceRemoved,
 
 			/* sensor events */
 			/* only available in sdl 2.0.9 or higher */
-			SensorUpdate =		0x1200,
+			SensorUpdate = 0x1200,
 
 			/* render events */
 			/* only available in sdl 2.0.2 or higher */
-			RenderTargetsReset =	0x2000,
+			RenderTargetsReset = 0x2000,
 			/* only available in sdl 2.0.4 or higher */
 			RenderDeviceReset,
 
@@ -2511,10 +2513,10 @@ namespace SDL2
 			 * your use, and should be allocated with
 			 * RegisterEvents()
 			 */
-			USEREVENT =			0x8000,
+			USEREVENT = 0x8000,
 
 			/* The last event, used for bouding arrays. */
-			LASTEVENT =			0xFFFF
+			LASTEVENT = 0xFFFF
 		}
 
 		/* Only available in 2.0.4 or higher */
@@ -2539,7 +2541,7 @@ namespace SDL2
 			public EventType type;
 			public uint32 timestamp;
 			public uint32 display;
-			public DisplayEventID displayEvent; // event, lolC#
+			public DisplayEventID displayEvent;// event, lolC#
 			private uint8 padding1;
 			private uint8 padding2;
 			private uint8 padding3;
@@ -2552,7 +2554,7 @@ namespace SDL2
 			public EventType type;
 			public uint32 timestamp;
 			public uint32 windowID;
-			public WindowEventID windowEvent; // event, lolC#
+			public WindowEventID windowEvent;// event, lolC#
 			private uint8 padding1;
 			private uint8 padding2;
 			private uint8 padding3;
@@ -2567,7 +2569,7 @@ namespace SDL2
 			public uint32 timestamp;
 			public uint32 windowID;
 			public uint8 state;
-			public uint8 isRepeat; /* non-zero if this is a repeat */
+			public uint8 isRepeat;/* non-zero if this is a repeat */
 			private uint8 padding2;
 			private uint8 padding3;
 			public KeySym keysym;
@@ -2600,7 +2602,7 @@ namespace SDL2
 			public uint32 timestamp;
 			public uint32 windowID;
 			public uint32 which;
-			public uint8 state; /* bitmask of buttons */
+			public uint8 state;/* bitmask of buttons */
 			private uint8 padding1;
 			private uint8 padding2;
 			private uint8 padding3;
@@ -2617,9 +2619,9 @@ namespace SDL2
 			public uint32 timestamp;
 			public uint32 windowID;
 			public uint32 which;
-			public uint8 button; /* button id */
-			public uint8 state; /* SDL_PRESSED or SDL_RELEASED */
-			public uint8 clicks; /* 1 for single-click, 2 for double-click, etc. */
+			public uint8 button;/* button id */
+			public uint8 state;/* SDL_PRESSED or SDL_RELEASED */
+			public uint8 clicks;/* 1 for single-click, 2 for double-click, etc. */
 			private uint8 padding1;
 			public int32 x;
 			public int32 y;
@@ -2632,9 +2634,9 @@ namespace SDL2
 			public uint32 timestamp;
 			public uint32 windowID;
 			public uint32 which;
-			public int32 x; /* amount scrolled horizontally */
-			public int32 y; /* amount scrolled vertically */
-			public uint32 direction; /* Set to one of the SDL_MOUSEWHEEL_* defines */
+			public int32 x;/* amount scrolled horizontally */
+			public int32 y;/* amount scrolled vertically */
+			public uint32 direction;/* Set to one of the SDL_MOUSEWHEEL_* defines */
 		}
 
 
@@ -2643,12 +2645,12 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
+			public int32 which;/* SDL_JoystickID */
 			public uint8 axis;
 			private uint8 padding1;
 			private uint8 padding2;
 			private uint8 padding3;
-			public Int16 axisValue; /* value, lolC# */
+			public Int16 axisValue;/* value, lolC# */
 			public uint16 padding4;
 		}
 
@@ -2657,7 +2659,7 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
+			public int32 which;/* SDL_JoystickID */
 			public uint8 ball;
 			private uint8 padding1;
 			private uint8 padding2;
@@ -2671,9 +2673,9 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
-			public uint8 hat; /* index of the hat */
-			public uint8 hatValue; /* value, lolC# */
+			public int32 which;/* SDL_JoystickID */
+			public uint8 hat;/* index of the hat */
+			public uint8 hatValue;/* value, lolC# */
 			private uint8 padding1;
 			private uint8 padding2;
 		}
@@ -2683,9 +2685,9 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
+			public int32 which;/* SDL_JoystickID */
 			public uint8 button;
-			public uint8 state; /* SDL_PRESSED or SDL_RELEASED */
+			public uint8 state;/* SDL_PRESSED or SDL_RELEASED */
 			private uint8 padding1;
 			private uint8 padding2;
 		}
@@ -2695,7 +2697,7 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
+			public int32 which;/* SDL_JoystickID */
 		}
 
 		[CRepr]
@@ -2703,12 +2705,12 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
+			public int32 which;/* SDL_JoystickID */
 			public uint8 axis;
 			private uint8 padding1;
 			private uint8 padding2;
 			private uint8 padding3;
-			public int16 axisValue; /* value, lolC# */
+			public int16 axisValue;/* value, lolC# */
 			private uint16 padding4;
 		}
 
@@ -2717,7 +2719,7 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which; /* SDL_JoystickID */
+			public int32 which;/* SDL_JoystickID */
 			public uint8 button;
 			public uint8 state;
 			private uint8 padding1;
@@ -2729,7 +2731,7 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public int32 which;	/* joystick id for ADDED,
+			public int32 which;/* joystick id for ADDED,
 						 * else instance id
 						 */
 		}
@@ -2751,8 +2753,8 @@ namespace SDL2
 		{
 			public uint32 type;
 			public uint32 timestamp;
-			public Int64 touchId; // SDL_TouchID
-			public Int64 fingerId; // SDL_GestureID
+			public Int64 touchId;// SDL_TouchID
+			public Int64 fingerId;// SDL_GestureID
 			public float x;
 			public float y;
 			public float dx;
@@ -2765,7 +2767,7 @@ namespace SDL2
 		{
 			public uint32 type;
 			public uint32 timestamp;
-			public Int64 touchId; // SDL_TouchID
+			public Int64 touchId;// SDL_TouchID
 			public float dTheta;
 			public float dDist;
 			public float x;
@@ -2779,8 +2781,8 @@ namespace SDL2
 		{
 			public uint32 type;
 			public uint32 timestamp;
-			public int64 touchId; // SDL_TouchID
-			public int64 gestureId; // SDL_GestureID
+			public int64 touchId;// SDL_TouchID
+			public int64 gestureId;// SDL_GestureID
 			public uint32 numFingers;
 			public float error;
 			public float x;
@@ -2824,8 +2826,8 @@ namespace SDL2
 			public uint32 timestamp;
 			public uint32 windowID;
 			public int32 code;
-			public void* data1; /* user-defined */
-			public void* data2; /* user-defined */
+			public void* data1;/* user-defined */
+			public void* data2;/* user-defined */
 		}
 
 		public struct SDL_SysWMmsg;
@@ -2835,11 +2837,11 @@ namespace SDL2
 		{
 			public EventType type;
 			public uint32 timestamp;
-			public SDL_SysWMmsg* msg; /* SDL_SysWMmsg*, system-dependent*/
+			public SDL_SysWMmsg* msg;/* SDL_SysWMmsg*, system-dependent*/
 		}
 
 		/* General event structure */
-		// C# doesn't do unions, so we do this ugly thing. 
+		// C# doesn't do unions, so we do this ugly thing.
 		[CRepr, Union]
 		public struct Event
 		{
@@ -2872,9 +2874,9 @@ namespace SDL2
 		}
 
 		public function int EventFilter(
-			void* userdata, // void*
-			Event* sdlevent // SDL_Event* event, lolC#
-		);
+			void* userdata,// void*
+			Event* sdlevent// SDL_Event* event, lolC#
+			);
 
 		/* Pump the event loop, getting events from the input devices*/
 		[LinkName("SDL_PumpEvents")]
@@ -2894,7 +2896,7 @@ namespace SDL2
 			EventAction action,
 			EventType minType,
 			EventType maxType
-		);
+			);
 
 		/* Checks to see if certain events are in the event queue */
 		[LinkName("SDL_HasEvent")]
@@ -2904,7 +2906,7 @@ namespace SDL2
 		public static extern Bool HasEvents(
 			EventType minType,
 			EventType maxType
-		);
+			);
 
 		/* Clears events from the event queue */
 		[LinkName("SDL_FlushEvent")]
@@ -2914,14 +2916,14 @@ namespace SDL2
 		public static extern void FlushEvents(
 			EventType min,
 			EventType max
-		);
+			);
 
 		[LinkName("SDL_PollEvent")]
 		public static extern int32 PollEvent(out Event event);
 
 		[LinkName("SDL_WaitEvent")]
 		public static extern int32 WaitEvent(out Event event);
-		
+
 		[LinkName("SDL_WaitEventTimeout")]
 		public static extern int32 WaitEventTimeout(out Event event, int32 timeout);
 
@@ -2932,35 +2934,35 @@ namespace SDL2
 		public static extern void SetEventFilter(
 			EventFilter filter,
 			void* userdata
-		);
+			);
 
 		/* userdata refers to a void* */
 		[LinkName("SDL_GetEventFilter")]
 		public static extern Bool GetEventFilter(
 			out EventFilter filter,
 			out void* userdata
-		);
+			);
 
 		/* userdata refers to a void* */
 		[LinkName("SDL_AddEventWatch")]
 		public static extern void AddEventWatch(
 			EventFilter filter,
 			void* userdata
-		);
+			);
 
 		/* userdata refers to a void* */
 		[LinkName("SDL_DelEventWatch")]
 		public static extern void DelEventWatch(
 			EventFilter filter,
 			void* userdata
-		);
+			);
 
 		/* userdata refers to a void* */
 		[LinkName("SDL_FilterEvents")]
 		public static extern void FilterEvents(
 			EventFilter filter,
 			void* userdata
-		);
+			);
 
 		[AllowDuplicates]
 		enum EventState : int32
@@ -2984,7 +2986,7 @@ namespace SDL2
 		/* Allocate a set of user-defined events */
 		[LinkName("SDL_RegisterEvents")]
 		public static extern uint32 RegisterEvents(int32 numevents);
-		
+
 		/* Scancodes based off USB keyboard page (0x07) */
 		public enum Scancode : uint32
 		{
@@ -3274,7 +3276,7 @@ namespace SDL2
 			UNKNOWN = 0,
 
 			RETURN = (.)'\r',
-			ESCAPE = 27, // '\033'
+			ESCAPE = 27,// '\033'
 			BACKSPACE = (.)'\b',
 			TAB = (.)'\t',
 			SPACE = (.)' ',
@@ -3483,7 +3485,7 @@ namespace SDL2
 			KPBINARY = (int)Scancode.KpBinary | SCANCODE_MASK,
 			KPOCTAL = (int)Scancode.KpOctal | SCANCODE_MASK,
 			KPDECIMAL = (int)Scancode.KpDecimal | SCANCODE_MASK,
-			KPHEXADECIMAL =	 (int)Scancode.KpHexadecimal | SCANCODE_MASK,
+			KPHEXADECIMAL = (int)Scancode.KpHexadecimal | SCANCODE_MASK,
 
 			LCTRL = (int)Scancode.LCtrl | SCANCODE_MASK,
 			LSHIFT = (int)Scancode.LShift | SCANCODE_MASK,
@@ -3516,14 +3518,14 @@ namespace SDL2
 
 			BRIGHTNESSDOWN =
 				(int)Scancode.Brightnessdown | SCANCODE_MASK,
-				BRIGHTNESSUP = (int)Scancode.Brightnessup | SCANCODE_MASK,
-				DISPLAYSWITCH = (int)Scancode.Displayswitch | SCANCODE_MASK,
-				KBDILLUMTOGGLE =
-			(int)Scancode.KbdIllumtoggle | SCANCODE_MASK,
-				KBDILLUMDOWN = (int)Scancode.KbdIllumdown | SCANCODE_MASK,
-				KBDILLUMUP = (int)Scancode.KbdIllumup | SCANCODE_MASK,
-				EJECT = (int)Scancode.Eject | SCANCODE_MASK,
-				SLEEP = (int)Scancode.Sleep | SCANCODE_MASK
+			BRIGHTNESSUP = (int)Scancode.Brightnessup | SCANCODE_MASK,
+			DISPLAYSWITCH = (int)Scancode.Displayswitch | SCANCODE_MASK,
+			KBDILLUMTOGGLE =
+				(int)Scancode.KbdIllumtoggle | SCANCODE_MASK,
+			KBDILLUMDOWN = (int)Scancode.KbdIllumdown | SCANCODE_MASK,
+			KBDILLUMUP = (int)Scancode.KbdIllumup | SCANCODE_MASK,
+			EJECT = (int)Scancode.Eject | SCANCODE_MASK,
+			SLEEP = (int)Scancode.Sleep | SCANCODE_MASK
 		}
 
 		/* Key modifiers (bitfield) */
@@ -3555,8 +3557,8 @@ namespace SDL2
 		{
 			public Scancode scancode;
 			public Keycode sym;
-			public KeyMod mod; /* uint16 */
-			public uint32 unicode; /* Deprecated */
+			public KeyMod mod;/* uint16 */
+			public uint32 unicode;/* Deprecated */
 		}
 
 		/* Get the window which has kbd focus */
@@ -3639,18 +3641,18 @@ namespace SDL2
 		/* System cursor types */
 		public enum SDL_SystemCursor : uint32
 		{
-			SDL_SYSTEM_CURSOR_ARROW,	// Arrow
-			SDL_SYSTEM_CURSOR_IBEAM,	// I-beam
-			SDL_SYSTEM_CURSOR_WAIT,		// Wait
-			SDL_SYSTEM_CURSOR_CROSSHAIR,	// Crosshair
-			SDL_SYSTEM_CURSOR_WAITARROW,	// Small wait cursor (or Wait if not available)
-			SDL_SYSTEM_CURSOR_SIZENWSE,	// Double arrow pointing northwest and southeast
-			SDL_SYSTEM_CURSOR_SIZENESW,	// Double arrow pointing northeast and southwest
-			SDL_SYSTEM_CURSOR_SIZEWE,	// Double arrow pointing west and east
-			SDL_SYSTEM_CURSOR_SIZENS,	// Double arrow pointing north and south
-			SDL_SYSTEM_CURSOR_SIZEALL,	// Four pointed arrow pointing north, south, east, and west
-			SDL_SYSTEM_CURSOR_NO,		// Slashed circle or crossbones
-			SDL_SYSTEM_CURSOR_HAND,		// Hand
+			SDL_SYSTEM_CURSOR_ARROW,// Arrow
+			SDL_SYSTEM_CURSOR_IBEAM,// I-beam
+			SDL_SYSTEM_CURSOR_WAIT,// Wait
+			SDL_SYSTEM_CURSOR_CROSSHAIR,// Crosshair
+			SDL_SYSTEM_CURSOR_WAITARROW,// Small wait cursor (or Wait if not available)
+			SDL_SYSTEM_CURSOR_SIZENWSE,// Double arrow pointing northwest and southeast
+			SDL_SYSTEM_CURSOR_SIZENESW,// Double arrow pointing northeast and southwest
+			SDL_SYSTEM_CURSOR_SIZEWE,// Double arrow pointing west and east
+			SDL_SYSTEM_CURSOR_SIZENS,// Double arrow pointing north and south
+			SDL_SYSTEM_CURSOR_SIZEALL,// Four pointed arrow pointing north, south, east, and west
+			SDL_SYSTEM_CURSOR_NO,// Slashed circle or crossbones
+			SDL_SYSTEM_CURSOR_HAND,// Hand
 			SDL_NUM_SYSTEM_CURSORS
 		}
 
@@ -3706,7 +3708,7 @@ namespace SDL2
 			int32 h,
 			int32 hot_x,
 			int32 hot_y
-		);
+			);
 
 		/* Create a cursor from an SDL_Surface */
 		/* IntPtr refers to an SDL_Cursor*, surface to an SDL_Surface* */
@@ -3715,7 +3717,7 @@ namespace SDL2
 			Surface* surface,
 			int32 hot_x,
 			int32 hot_y
-		);
+			);
 
 		/* Create a cursor from a system cursor id */
 		/* return value is an SDL_Cursor pointer */
@@ -3744,25 +3746,25 @@ namespace SDL2
 		public static uint32 BUTTON(uint32 X)
 		{
 			// If only there were a better way of doing this in C#
-			return (uint32) (1 << ((int32) X - 1));
+			return (uint32)(1 << ((int32)X - 1));
 		}
 
 		public const uint32 SDL_BUTTON_LEFT = 1;
-		public const uint32 SDL_BUTTON_MIDDLE =	2;
+		public const uint32 SDL_BUTTON_MIDDLE = 2;
 		public const uint32 SDL_BUTTON_RIGHT = 3;
-		public const uint32 SDL_BUTTON_X1 =	4;
-		public const uint32 SDL_BUTTON_X2 =	5;
-		public static readonly uint32 BUTTON_LMASK =	BUTTON(SDL_BUTTON_LEFT);
-		public static readonly uint32 BUTTON_MMASK =	BUTTON(SDL_BUTTON_MIDDLE);
-		public static readonly uint32 BUTTON_RMASK =	BUTTON(SDL_BUTTON_RIGHT);
-		public static readonly uint32 BUTTON_X1MASK =	BUTTON(SDL_BUTTON_X1);
-		public static readonly uint32 BUTTON_X2MASK =	BUTTON(SDL_BUTTON_X2);
+		public const uint32 SDL_BUTTON_X1 = 4;
+		public const uint32 SDL_BUTTON_X2 = 5;
+		public static readonly uint32 BUTTON_LMASK = BUTTON(SDL_BUTTON_LEFT);
+		public static readonly uint32 BUTTON_MMASK = BUTTON(SDL_BUTTON_MIDDLE);
+		public static readonly uint32 BUTTON_RMASK = BUTTON(SDL_BUTTON_RIGHT);
+		public static readonly uint32 BUTTON_X1MASK = BUTTON(SDL_BUTTON_X1);
+		public static readonly uint32 BUTTON_X2MASK = BUTTON(SDL_BUTTON_X2);
 
 		public const uint32 TOUCH_MOUSEID = uint32.MaxValue;
 
 		public struct SDL_Finger
 		{
-			public int64 id; // SDL_FingerID
+			public int64 id;// SDL_FingerID
 			public float x;
 			public float y;
 			public float pressure;
@@ -3770,7 +3772,7 @@ namespace SDL2
 
 		/**
 		 *  \brief Get the number of registered touch devices.
- 		 */
+		  */
 		[LinkName("SDL_GetNumTouchDevices")]
 		public static extern int32 GetNumTouchDevices();
 
@@ -3794,15 +3796,15 @@ namespace SDL2
 		public static extern SDL_Finger* GetTouchFinger(int64 touchID, int32 index);
 
 
-		public const uint8 SDL_HAT_CENTERED =	0x00;
-		public const uint8 SDL_HAT_UP =		0x01;
-		public const uint8 SDL_HAT_RIGHT =	0x02;
-		public const uint8 SDL_HAT_DOWN =	0x04;
-		public const uint8 SDL_HAT_LEFT =	0x08;
-		public const uint8 SDL_HAT_RIGHTUP =	SDL_HAT_RIGHT | SDL_HAT_UP;
-		public const uint8 SDL_HAT_RIGHTDOWN =	SDL_HAT_RIGHT | SDL_HAT_DOWN;
-		public const uint8 SDL_HAT_LEFTUP =	SDL_HAT_LEFT | SDL_HAT_UP;
-		public const uint8 SDL_HAT_LEFTDOWN =	SDL_HAT_LEFT | SDL_HAT_DOWN;
+		public const uint8 SDL_HAT_CENTERED = 0x00;
+		public const uint8 SDL_HAT_UP = 0x01;
+		public const uint8 SDL_HAT_RIGHT = 0x02;
+		public const uint8 SDL_HAT_DOWN = 0x04;
+		public const uint8 SDL_HAT_LEFT = 0x08;
+		public const uint8 SDL_HAT_RIGHTUP = SDL_HAT_RIGHT | SDL_HAT_UP;
+		public const uint8 SDL_HAT_RIGHTDOWN = SDL_HAT_RIGHT | SDL_HAT_DOWN;
+		public const uint8 SDL_HAT_LEFTUP = SDL_HAT_LEFT | SDL_HAT_UP;
+		public const uint8 SDL_HAT_LEFTDOWN = SDL_HAT_LEFT | SDL_HAT_DOWN;
 
 		public enum SDL_JoystickPowerLevel : int32
 		{
@@ -3839,21 +3841,21 @@ namespace SDL2
 			uint16 low_frequency_rumble,
 			uint16 high_frequency_rumble,
 			uint32 duration_ms
-		);
+			);
 
-		
+
 		[LinkName("SDL_JoystickClose")]
 		public static extern void JoystickClose(SDL_Joystick* joystick);
 
 		[LinkName("SDL_JoystickEventState")]
 		public static extern int32 JoystickEventState(int state);
 
-		
+
 		[LinkName("SDL_JoystickGetAxis")]
 		public static extern int16 JoystickGetAxis(
 			SDL_Joystick* joystick,
 			int32 axis
-		);
+			);
 
 		/* joystick refers to an SDL_Joystick*.
 		 * This function is only available in 2.0.6 or higher.
@@ -3863,72 +3865,72 @@ namespace SDL2
 			SDL_Joystick* joystick,
 			int32 axis,
 			out uint16 state
-		);
+			);
 
-		
+
 		[LinkName("SDL_JoystickGetBall")]
 		public static extern int JoystickGetBall(
 			SDL_Joystick* joystick,
 			int32 ball,
 			out int32 dx,
 			out int32 dy
-		);
-		
+			);
+
 		[LinkName("SDL_JoystickGetButton")]
 		public static extern uint8 JoystickGetButton(
 			SDL_Joystick* joystick,
 			int32 button
-		);
-		
+			);
+
 		[LinkName("SDL_JoystickGetHat")]
 		public static extern uint8 JoystickGetHat(
 			SDL_Joystick* joystick,
 			int32 hat
-		);
-		
+			);
+
 		[LinkName("SDL_JoystickName")]
 		public static extern char8* JoystickName(SDL_Joystick* joystick);
 
 		[LinkName("SDL_JoystickNameForIndex")]
 		public static extern char8* JoystickNameForIndex(int32 device_index);
-		
+
 		[LinkName("SDL_JoystickNumAxes")]
 		public static extern int32 JoystickNumAxes(SDL_Joystick* joystick);
-		
+
 		[LinkName("SDL_JoystickNumBalls")]
 		public static extern int32 JoystickNumBalls(SDL_Joystick* joystick);
-		
+
 		[LinkName("SDL_JoystickNumButtons")]
 		public static extern int32 JoystickNumButtons(SDL_Joystick* joystick);
-		
+
 		[LinkName("SDL_JoystickNumHats")]
 		public static extern int32 JoystickNumHats(SDL_Joystick* joystick);
-		
+
 		[LinkName("SDL_JoystickOpen")]
 		public static extern SDL_Joystick* JoystickOpen(int32 device_index);
-		
+
 		[LinkName("SDL_JoystickUpdate")]
 		public static extern void JoystickUpdate();
-		
+
 		[LinkName("SDL_NumJoysticks")]
 		public static extern int32 NumJoysticks();
 
 		[LinkName("SDL_JoystickGetDeviceGUID")]
 		public static extern Guid JoystickGetDeviceGUID(
 			int32 device_index
-		);
-		
+			);
+
 		[LinkName("SDL_JoystickGetGUID")]
 		public static extern Guid JoystickGetGUID(
 			SDL_Joystick* joystick
-		);
+			);
 
 		[LinkName("SDL_JoystickGetGUIDString")]
 		public static extern void JoystickGetGUIDString(
 			Guid guid,
 			uint8* pszGUID,
 			int32 cbGUID
-		);
+			);
 
 		[LinkName("SDL_JoystickGetGUIDFromString")]
 		public static extern Guid JoystickGetGUIDFromString(char8* pchGuid);
@@ -3979,7 +3981,7 @@ namespace SDL2
 		[LinkName("SDL_JoystickGetType")]
 		public static extern SDL_JoystickType JoystickGetType(SDL_Joystick* joystick);
 
-		
+
 		[LinkName("SDL_JoystickGetAttached")]
 		public static extern Bool JoystickGetAttached(SDL_Joystick* joystick);
 
@@ -3993,7 +3995,7 @@ namespace SDL2
 		[LinkName("SDL_JoystickCurrentPowerLevel")]
 		public static extern SDL_JoystickPowerLevel JoystickCurrentPowerLevel(
 			SDL_Joystick* joystick
-		);
+			);
 
 		/* int refers to an SDL_JoystickID, IntPtr to an SDL_Joystick*.
 		 * This function is only available in 2.0.4 or higher.
@@ -4087,7 +4089,7 @@ namespace SDL2
 		[LinkName("SDL_GameControllerAddMapping")]
 		public static extern int32 GameControllerAddMapping(
 			char8* mappingString
-		);
+			);
 
 		/* This function is only available in 2.0.6 or higher. */
 		[LinkName("SDL_GameControllerNumMappings")]
@@ -4102,7 +4104,7 @@ namespace SDL2
 		private static extern int32 GameControllerAddMappingsFromRW(
 			RWOps* rw,
 			int32 freerw
-		);
+			);
 		public static int32 GameControllerAddMappingsFromFile(char8* file)
 		{
 			RWOps* rwops = RWFromFile(file, "rb");
@@ -4118,7 +4120,7 @@ namespace SDL2
 		[LinkName("SDL_GameControllerMapping")]
 		public static extern char8* GameControllerMapping(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		[LinkName("SDL_IsGameController")]
 		public static extern Bool IsGameController(int32 joystick_index);
@@ -4126,13 +4128,13 @@ namespace SDL2
 		[LinkName("SDL_GameControllerNameForIndex")]
 		public static extern char8* GameControllerNameForIndex(
 			int32 joystick_index
-		);
+			);
 
 		/* Only available in 2.0.9 or higher */
 		[LinkName("SDL_GameControllerMappingForDeviceIndex")]
 		public static extern char8* GameControllerMappingForDeviceIndex(
 			int32 joystick_index
-		);
+			);
 
 		[LinkName("SDL_GameControllerOpen")]
 		public static extern SDL_GameController* GameControllerOpen(int32 joystick_index);
@@ -4141,7 +4143,7 @@ namespace SDL2
 		[LinkName("SDL_GameControllerName")]
 		public static extern char8* GameControllerName(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController*.
 		 * This function is only available in 2.0.6 or higher.
@@ -4149,7 +4151,7 @@ namespace SDL2
 		[LinkName("SDL_GameControllerGetVendor")]
 		public static extern uint16 GameControllerGetVendor(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController*.
 		 * This function is only available in 2.0.6 or higher.
@@ -4157,7 +4159,7 @@ namespace SDL2
 		[LinkName("SDL_GameControllerGetProduct")]
 		public static extern uint16 GameControllerGetProduct(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController*.
 		 * This function is only available in 2.0.6 or higher.
@@ -4165,13 +4167,13 @@ namespace SDL2
 		[LinkName("SDL_GameControllerGetProductVersion")]
 		public static extern uint16 GameControllerGetProductVersion(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController* */
 		[LinkName("SDL_GameControllerGetAttached")]
 		public static extern Bool GameControllerGetAttached(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		/* IntPtr refers to an SDL_Joystick*
 		 * gamecontroller refers to an SDL_GameController*
@@ -4179,7 +4181,7 @@ namespace SDL2
 		[LinkName("SDL_GameControllerGetJoystick")]
 		public static extern SDL_Joystick* GameControllerGetJoystick(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		[LinkName("SDL_GameControllerEventState")]
 		public static extern int GameControllerEventState(int state);
@@ -4190,50 +4192,50 @@ namespace SDL2
 		[LinkName("SDL_GameControllerGetAxisFromString")]
 		public static extern SDL_GameControllerAxis GameControllerGetAxisFromString(
 			char8* pchString
-		);
+			);
 
 		[LinkName("SDL_GameControllerGetStringForAxis")]
 		public static extern char8* GameControllerGetStringForAxis(
 			SDL_GameControllerAxis axis
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController* */
 		[LinkName("SDL_GameControllerGetBindForAxis")]
 		public static extern SDL_GameControllerButtonBind GameControllerGetBindForAxis(
 			SDL_GameController* gamecontroller,
 			SDL_GameControllerAxis axis
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController* */
 		[LinkName("SDL_GameControllerGetAxis")]
 		public static extern int16 GameControllerGetAxis(
 			SDL_GameController* gamecontroller,
 			SDL_GameControllerAxis axis
-		);
+			);
 
 		[LinkName("SDL_GameControllerGetButtonFromString")]
 		public static extern SDL_GameControllerButton GameControllerGetButtonFromString(
 			char8* pchString
-		);
+			);
 
 		[LinkName("SDL_GameControllerGetStringForButton")]
 		public static extern char8* GameControllerGetStringForButton(
 			SDL_GameControllerButton button
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController* */
 		[LinkName("SDL_GameControllerGetBindForButton")]
 		public static extern SDL_GameControllerButtonBind GameControllerGetBindForButton(
 			SDL_GameController* gamecontroller,
 			SDL_GameControllerButton button
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController* */
 		[LinkName("SDL_GameControllerGetButton")]
 		public static extern uint8 GameControllerGetButton(
 			SDL_GameController* gamecontroller,
 			SDL_GameControllerButton button
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController*.
 		 * This function is only available in 2.0.9 or higher.
@@ -4244,13 +4246,13 @@ namespace SDL2
 			uint16 low_frequency_rumble,
 			uint16 high_frequency_rumble,
 			uint32 duration_ms
-		);
+			);
 
 		/* gamecontroller refers to an SDL_GameController* */
 		[LinkName("SDL_GameControllerClose")]
 		public static extern void GameControllerClose(
 			SDL_GameController* gamecontroller
-		);
+			);
 
 		/* int refers to an SDL_JoystickID, IntPtr to an SDL_GameController*.
 		 * This function is only available in 2.0.4 or higher.
@@ -4259,26 +4261,26 @@ namespace SDL2
 		public static extern SDL_GameController* GameControllerFromInstanceID(int joyid);
 
 		/* SDL_HapticEffect type */
-		public const uint16 SDL_HAPTIC_CONSTANT =	(1 << 0);
-		public const uint16 SDL_HAPTIC_SINE =		(1 << 1);
-		public const uint16 SDL_HAPTIC_LEFTRIGHT =	(1 << 2);
-		public const uint16 SDL_HAPTIC_TRIANGLE =	(1 << 3);
-		public const uint16 SDL_HAPTIC_SAWTOOTHUP =	(1 << 4);
-		public const uint16 SDL_HAPTIC_SAWTOOTHDOWN =	(1 << 5);
-		public const uint16 SDL_HAPTIC_SPRING =		(1 << 7);
-		public const uint16 SDL_HAPTIC_DAMPER =		(1 << 8);
-		public const uint16 SDL_HAPTIC_INERTIA =	(1 << 9);
-		public const uint16 SDL_HAPTIC_FRICTION =	(1 << 10);
-		public const uint16 SDL_HAPTIC_CUSTOM =		(1 << 11);
-		public const uint16 SDL_HAPTIC_GAIN =		(1 << 12);
-		public const uint16 SDL_HAPTIC_AUTOCENTER =	(1 << 13);
-		public const uint16 SDL_HAPTIC_STATUS =		(1 << 14);
-		public const uint16 SDL_HAPTIC_PAUSE =		(1 << 15);
+		public const uint16 SDL_HAPTIC_CONSTANT = (1 << 0);
+		public const uint16 SDL_HAPTIC_SINE = (1 << 1);
+		public const uint16 SDL_HAPTIC_LEFTRIGHT = (1 << 2);
+		public const uint16 SDL_HAPTIC_TRIANGLE = (1 << 3);
+		public const uint16 SDL_HAPTIC_SAWTOOTHUP = (1 << 4);
+		public const uint16 SDL_HAPTIC_SAWTOOTHDOWN = (1 << 5);
+		public const uint16 SDL_HAPTIC_SPRING = (1 << 7);
+		public const uint16 SDL_HAPTIC_DAMPER = (1 << 8);
+		public const uint16 SDL_HAPTIC_INERTIA = (1 << 9);
+		public const uint16 SDL_HAPTIC_FRICTION = (1 << 10);
+		public const uint16 SDL_HAPTIC_CUSTOM = (1 << 11);
+		public const uint16 SDL_HAPTIC_GAIN = (1 << 12);
+		public const uint16 SDL_HAPTIC_AUTOCENTER = (1 << 13);
+		public const uint16 SDL_HAPTIC_STATUS = (1 << 14);
+		public const uint16 SDL_HAPTIC_PAUSE = (1 << 15);
 
 		/* SDL_HapticDirection type */
-		public const uint8 SDL_HAPTIC_POLAR =		0;
-		public const uint8 SDL_HAPTIC_CARTESIAN =	1;
-		public const uint8 SDL_HAPTIC_SPHERICAL =	2;
+		public const uint8 SDL_HAPTIC_POLAR = 0;
+		public const uint8 SDL_HAPTIC_CARTESIAN = 1;
+		public const uint8 SDL_HAPTIC_SPHERICAL = 2;
 
 		/* SDL_HapticRunEffect */
 		public const uint32 SDL_HAPTIC_INFINITY = 4294967295U;
@@ -4406,7 +4408,7 @@ namespace SDL2
 			public uint8 channels;
 			public uint16 period;
 			public uint16 samples;
-			public uint16* data; // uint16*
+			public uint16* data;// uint16*
 			// Envelope
 			public uint16 attack_length;
 			public uint16 attack_level;
@@ -4437,21 +4439,21 @@ namespace SDL2
 		public static extern void HapticDestroyEffect(
 			SDL_Haptic* haptic,
 			int32 effect
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticEffectSupported")]
 		public static extern int HapticEffectSupported(
 			SDL_Haptic* haptic,
 			ref SDL_HapticEffect effect
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticGetEffectStatus")]
 		public static extern int HapticGetEffectStatus(
 			SDL_Haptic* haptic,
 			int32 effect
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticIndex")]
@@ -4466,7 +4468,7 @@ namespace SDL2
 		public static extern int32 HapticNewEffect(
 			SDL_Haptic* haptic,
 			ref SDL_HapticEffect effect
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticNumAxes")]
@@ -4491,7 +4493,7 @@ namespace SDL2
 		[LinkName("SDL_HapticOpenFromJoystick")]
 		public static extern SDL_Haptic* HapticOpenFromJoystick(
 			SDL_Joystick* joystick
-		);
+			);
 
 		/* IntPtr refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticOpenFromMouse")]
@@ -4515,7 +4517,7 @@ namespace SDL2
 			SDL_Haptic* haptic,
 			float strength,
 			uint32 length
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticRumbleStop")]
@@ -4531,21 +4533,21 @@ namespace SDL2
 			SDL_Haptic* haptic,
 			int32 effect,
 			uint32 iterations
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticSetAutocenter")]
 		public static extern int32 HapticSetAutocenter(
 			SDL_Haptic* haptic,
 			int32 autocenter
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticSetGain")]
 		public static extern int32 HapticSetGain(
 			SDL_Haptic* haptic,
 			int32 gain
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticStopAll")]
@@ -4556,7 +4558,7 @@ namespace SDL2
 		public static extern int32 HapticStopEffect(
 			SDL_Haptic* haptic,
 			int32 effect
-		);
+			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticUnpause")]
@@ -4568,9 +4570,9 @@ namespace SDL2
 			SDL_Haptic* haptic,
 			int32 effect,
 			ref SDL_HapticEffect data
-		);
+			);
 
-		
+
 		[LinkName("SDL_JoystickIsHaptic")]
 		public static extern int32 JoystickIsHaptic(SDL_Joystick* joystick);
 
@@ -4619,7 +4621,7 @@ namespace SDL2
 		[LinkName("SDL_SensorFromInstanceID")]
 		public static extern SDL_Sensor* SensorFromInstanceID(
 			int32 instance_id
-		);
+			);
 
 		public struct SDL_Sensor;
 
@@ -4645,7 +4647,7 @@ namespace SDL2
 			SDL_Sensor* sensor,
 			float* data,
 			int32 num_values
-		);
+			);
 
 		/* sensor refers to an SDL_Sensor* */
 		[LinkName("SDL_SensorClose")]
@@ -4654,14 +4656,14 @@ namespace SDL2
 		[LinkName("SDL_SensorUpdate")]
 		public static extern void SensorUpdate();
 
-		public const uint16 SDL_AUDIO_MASK_BITSIZE =	0xFF;
-		public const uint16 SDL_AUDIO_MASK_DATATYPE =	(1 << 8);
-		public const uint16 SDL_AUDIO_MASK_ENDIAN =	(1 << 12);
-		public const uint16 SDL_AUDIO_MASK_SIGNED =	(1 << 15);
+		public const uint16 SDL_AUDIO_MASK_BITSIZE = 0xFF;
+		public const uint16 SDL_AUDIO_MASK_DATATYPE = (1 << 8);
+		public const uint16 SDL_AUDIO_MASK_ENDIAN = (1 << 12);
+		public const uint16 SDL_AUDIO_MASK_SIGNED = (1 << 15);
 
 		public static uint16 SDL_AUDIO_BITSIZE(uint16 x)
 		{
-			return (uint16) (x & SDL_AUDIO_MASK_BITSIZE);
+			return (uint16)(x & SDL_AUDIO_MASK_BITSIZE);
 		}
 
 		public static Bool AUDIO_ISFLOAT(uint16 x)
@@ -4694,20 +4696,20 @@ namespace SDL2
 			return (x & SDL_AUDIO_MASK_SIGNED) == 0;
 		}
 
-		public const uint16 AUDIO_U8 =		0x0008;
-		public const uint16 AUDIO_S8 =		0x8008;
-		public const uint16 AUDIO_U16LSB =	0x0010;
-		public const uint16 AUDIO_S16LSB =	0x8010;
-		public const uint16 AUDIO_U16MSB =	0x1010;
-		public const uint16 AUDIO_S16MSB =	0x9010;
-		public const uint16 AUDIO_U16 =		AUDIO_U16LSB;
-		public const uint16 AUDIO_S16 =		AUDIO_S16LSB;
-		public const uint16 AUDIO_S32LSB =	0x8020;
-		public const uint16 AUDIO_S32MSB =	0x9020;
-		public const uint16 AUDIO_S32 =		AUDIO_S32LSB;
-		public const uint16 AUDIO_F32LSB =	0x8120;
-		public const uint16 AUDIO_F32MSB =	0x9120;
-		public const uint16 AUDIO_F32 =		AUDIO_F32LSB;
+		public const uint16 AUDIO_U8 = 0x0008;
+		public const uint16 AUDIO_S8 = 0x8008;
+		public const uint16 AUDIO_U16LSB = 0x0010;
+		public const uint16 AUDIO_S16LSB = 0x8010;
+		public const uint16 AUDIO_U16MSB = 0x1010;
+		public const uint16 AUDIO_S16MSB = 0x9010;
+		public const uint16 AUDIO_U16 = AUDIO_U16LSB;
+		public const uint16 AUDIO_S16 = AUDIO_S16LSB;
+		public const uint16 AUDIO_S32LSB = 0x8020;
+		public const uint16 AUDIO_S32MSB = 0x9020;
+		public const uint16 AUDIO_S32 = AUDIO_S32LSB;
+		public const uint16 AUDIO_F32LSB = 0x8120;
+		public const uint16 AUDIO_F32MSB = 0x9120;
+		public const uint16 AUDIO_F32 = AUDIO_F32LSB;
 
 		public static readonly uint16 AUDIO_U16SYS =
 			BitConverter.IsLittleEndian ? AUDIO_U16LSB : AUDIO_U16MSB;
@@ -4718,16 +4720,16 @@ namespace SDL2
 		public static readonly uint16 AUDIO_F32SYS =
 			BitConverter.IsLittleEndian ? AUDIO_F32LSB : AUDIO_F32MSB;
 
-		public const uint32 AUDIO_ALLOW_FREQUENCY_CHANGE =	0x00000001;
-		public const uint32 AUDIO_ALLOW_FORMAT_CHANGE =	0x00000002;
-		public const uint32 AUDIO_ALLOW_CHANNELS_CHANGE =	0x00000004;
-		public const uint32 AUDIO_ALLOW_SAMPLES_CHANGE =	0x00000008;
+		public const uint32 AUDIO_ALLOW_FREQUENCY_CHANGE = 0x00000001;
+		public const uint32 AUDIO_ALLOW_FORMAT_CHANGE = 0x00000002;
+		public const uint32 AUDIO_ALLOW_CHANNELS_CHANGE = 0x00000004;
+		public const uint32 AUDIO_ALLOW_SAMPLES_CHANGE = 0x00000008;
 		public const uint32 AUDIO_ALLOW_ANY_CHANGE = (
 			AUDIO_ALLOW_FREQUENCY_CHANGE |
 			AUDIO_ALLOW_FORMAT_CHANGE |
 			AUDIO_ALLOW_CHANNELS_CHANGE |
 			AUDIO_ALLOW_SAMPLES_CHANGE
-		);
+			);
 
 		public const int32 MIX_MAXVOLUME = 128;
 
@@ -4742,13 +4744,13 @@ namespace SDL2
 		public struct SDL_AudioSpec
 		{
 			public int32 freq;
-			public uint16 format; // SDL_AudioFormat
+			public uint16 format;// SDL_AudioFormat
 			public uint8 channels;
 			public uint8 silence;
 			public uint16 samples;
 			public uint32 size;
 			public AudioCallback callback;
-			public void* userdata; // void*
+			public void* userdata;// void*
 		}
 
 		/* userdata refers to a void*, stream to a Uint8 */
@@ -4756,7 +4758,7 @@ namespace SDL2
 			void* userdata,
 			uint8* stream,
 			int len
-		);
+			);
 
 		[LinkName("SDL_AudioInit")]
 		public static extern int32 AudioInit(char8* driver_name);
@@ -4779,13 +4781,13 @@ namespace SDL2
 		public static extern char8* GetAudioDeviceName(
 			int32 index,
 			int32 iscapture
-		);
+			);
 
 		/* dev refers to an SDL_AudioDeviceID */
 		[LinkName("SDL_GetAudioDeviceStatus")]
 		public static extern SDL_AudioStatus GetAudioDeviceStatus(
 			uint32 dev
-		);
+			);
 
 		[LinkName("SDL_GetAudioDriver")]
 		public static extern char8* GetAudioDriver(int32 index);
@@ -4811,13 +4813,14 @@ namespace SDL2
 			SDL_AudioSpec* spec,
 			out uint8* audio_buf,
 			out uint32 audio_len
-		);
+			);
 		public static SDL_AudioSpec* LoadWAV(
 			char8* file,
 			SDL_AudioSpec* spec,
 			out uint8* audio_buf,
 			out uint32 audio_len
-		) {
+			)
+		{
 			RWOps* rwops = RWFromFile(file, "rb");
 			SDL_AudioSpec* result_ptr = LoadWAV_RW(
 				rwops,
@@ -4825,7 +4828,7 @@ namespace SDL2
 				spec,
 				out audio_buf,
 				out audio_len
-			);
+				);
 			return result_ptr;
 		}
 
@@ -4842,7 +4845,7 @@ namespace SDL2
 			uint8* src,
 			uint32 len,
 			int32 volume
-		);
+			);
 
 		/* format refers to an SDL_AudioFormat */
 		[LinkName("SDL_MixAudioFormat")]
@@ -4852,13 +4855,13 @@ namespace SDL2
 			uint16 format,
 			uint32 len,
 			int32 volume
-		);
+			);
 
 		[LinkName("SDL_OpenAudio")]
 		public static extern int OpenAudio(
 			ref SDL_AudioSpec desired,
 			SDL_AudioSpec* obtained
-		);
+			);
 
 		/* uint32 refers to an SDL_AudioDeviceID */
 		[LinkName("SDL_OpenAudioDevice")]
@@ -4868,11 +4871,10 @@ namespace SDL2
 			ref SDL_AudioSpec desired,
 			out SDL_AudioSpec obtained,
 			int32 allowed_changes
-		);
+			);
 
 		struct AudioDeviceID : uint32
 		{
-
 		}
 
 		[LinkName("SDL_PauseAudio")]
@@ -4883,7 +4885,7 @@ namespace SDL2
 		public static extern void PauseAudioDevice(
 			uint32 dev,
 			int32 pause_on
-		);
+			);
 
 		[LinkName("SDL_UnlockAudio")]
 		public static extern void UnlockAudio();
@@ -4899,7 +4901,7 @@ namespace SDL2
 			AudioDeviceID dev,
 			void* data,
 			uint32 len
-		);
+			);
 
 		/* dev refers to an SDL_AudioDeviceID, data to a void* */
 		/* Only available in 2.0.5 */
@@ -4908,7 +4910,7 @@ namespace SDL2
 			AudioDeviceID dev,
 			void* data,
 			uint32 len
-		);
+			);
 
 		/* dev refers to an SDL_AudioDeviceID */
 		/* Only available in 2.0.4 */
@@ -4935,7 +4937,7 @@ namespace SDL2
 			uint16 dst_format,
 			uint8 dst_channels,
 			int32 dst_rate
-		);
+			);
 
 		/* stream refers to an SDL_AudioStream*, buf to a void*.
 		 * Only available in 2.0.7
@@ -4945,7 +4947,7 @@ namespace SDL2
 			AudioStream* stream,
 			void* buf,
 			int len
-		);
+			);
 
 		/* stream refers to an SDL_AudioStream*, buf to a void*.
 		 * Only available in 2.0.7
@@ -4955,7 +4957,7 @@ namespace SDL2
 			AudioStream* stream,
 			void* buf,
 			int len
-		);
+			);
 
 		/* stream refers to an SDL_AudioStream*.
 		 * Only available in 2.0.7
@@ -5012,7 +5014,7 @@ namespace SDL2
 			uint32 interval,
 			TimerCallback callback,
 			void* param
-		);
+			);
 
 		/* id refers to an SDL_TimerID */
 		[LinkName("SDL_RemoveTimer")]
@@ -5026,13 +5028,13 @@ namespace SDL2
 			uint32 message,
 			uint64 wParam,
 			int64 lParam
-		);
+			);
 
 		[LinkName("SDL_SetWindowsMessageHook")]
 		public static extern void SetWindowsMessageHook(
 			WindowsMessageHook callback,
 			void* userdata
-		);
+			);
 
 		/* iOS */
 
@@ -5040,11 +5042,11 @@ namespace SDL2
 
 		[LinkName("SDL_iPhoneSetAnimationCallback")]
 		public static extern int iPhoneSetAnimationCallback(
-			Window* window, /* SDL_Window* */
+			Window* window,/* SDL_Window* */
 			int32 interval,
 			iPhoneAnimationCallback callback,
 			void* callbackParam
-		);
+			);
 
 		[LinkName("SDL_iPhoneSetEventPump")]
 		public static extern void iPhoneSetEventPump(Bool enabled);
@@ -5129,34 +5131,34 @@ namespace SDL2
 		[CRepr]
 		public struct INTERNAL_winrt_wminfo
 		{
-			public void* window; // Refers to an IInspectable*
+			public void* window;// Refers to an IInspectable*
 		}
 
 		[CRepr]
 		public struct INTERNAL_x11_wminfo
 		{
-			public void* display; // Refers to a Display*
-			public void* window; // Refers to a Window (XID, use ToInt64!)
+			public void* display;// Refers to a Display*
+			public void* window;// Refers to a Window (XID, use ToInt64!)
 		}
 
 		[CRepr]
 		public struct INTERNAL_directfb_wminfo
 		{
-			public void* dfb; // Refers to an IDirectFB*
-			public void* window; // Refers to an IDirectFBWindow*
-			public void* surface; // Refers to an IDirectFBSurface*
+			public void* dfb;// Refers to an IDirectFB*
+			public void* window;// Refers to an IDirectFBWindow*
+			public void* surface;// Refers to an IDirectFBSurface*
 		}
 
 		[CRepr]
 		public struct INTERNAL_cocoa_wminfo
 		{
-			public void* window; // Refers to an NSWindow*
+			public void* window;// Refers to an NSWindow*
 		}
 
 		[CRepr]
 		public struct INTERNAL_uikit_wminfo
 		{
-			public void* window; // Refers to a UIWindow*
+			public void* window;// Refers to a UIWindow*
 			public uint32 framebuffer;
 			public uint32 colorbuffer;
 			public uint32 resolveFramebuffer;
@@ -5165,23 +5167,23 @@ namespace SDL2
 		[CRepr]
 		public struct INTERNAL_wayland_wminfo
 		{
-			public void* display; // Refers to a wl_display*
-			public void* surface; // Refers to a wl_surface*
-			public void* shell_surface; // Refers to a wl_shell_surface*
+			public void* display;// Refers to a wl_display*
+			public void* surface;// Refers to a wl_surface*
+			public void* shell_surface;// Refers to a wl_shell_surface*
 		}
 
 		[CRepr]
 		public struct INTERNAL_mir_wminfo
 		{
-			public void* connection; // Refers to a MirConnection*
-			public void* surface; // Refers to a MirSurface*
+			public void* connection;// Refers to a MirConnection*
+			public void* surface;// Refers to a MirSurface*
 		}
 
 		[CRepr]
 		public struct INTERNAL_android_wminfo
 		{
-			public void* window; // Refers to an ANativeWindow
-			public void* surface; // Refers to an EGLSurface
+			public void* window;// Refers to an ANativeWindow
+			public void* surface;// Refers to an EGLSurface
 		}
 
 		[CRepr, Union]
@@ -5208,12 +5210,12 @@ namespace SDL2
 			public SDL_SYSWM_TYPE subsystem;
 			public INTERNAL_SysWMDriverUnion info;
 		}
-		
+
 		[LinkName("SDL_GetWindowWMInfo")]
 		public static extern Bool GetWindowWMInfo(
 			Window* window,
 			ref SDL_SysWMinfo info
-		);
+			);
 
 		/* Only available in 2.0.1 */
 		[LinkName("SDL_GetBasePath")]
@@ -5236,7 +5238,7 @@ namespace SDL2
 		public static extern SDL_PowerState GetPowerInfo(
 			out int32 secs,
 			out int32 pct
-		);
+			);
 
 		[LinkName("SDL_GetCPUCount")]
 		public static extern int32 GetCPUCount();
