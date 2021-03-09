@@ -342,7 +342,6 @@ namespace SDL2
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogInfo")]
-
 		public static extern void LogInfo(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
