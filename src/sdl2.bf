@@ -52,7 +52,7 @@ namespace SDL2
 		}
 
 		[LinkName("SDL_malloc")]
-		public static extern void* malloc(int size);
+		public static extern void* malloc(int32 size);
 
 		[LinkName("SDL_free")]
 		public static extern void free(void* memblock);
@@ -88,9 +88,9 @@ namespace SDL2
 		}
 
 		[LinkName("SDL_Init")]
-		public static extern int Init(InitFlag flags);
+		public static extern int32 Init(InitFlag flags);
 		[LinkName("SDL_InitSubSystem")]
-		public static extern int InitSubSystem(InitFlag flags);
+		public static extern int32 InitSubSystem(InitFlag flags);
 		[LinkName("SDL_Quit")]
 		public static extern void Quit();
 		[LinkName("SDL_QuitSubSystem")]
@@ -334,7 +334,7 @@ namespace SDL2
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogVerbose")]
-		public static extern void LogVerbose(int category, char8* fmtAndArglist, ...);
+		public static extern void LogVerbose(int32 category, char8* fmtAndArglist, ...);
 
 		/* Use string.Format for arglists */
 		[LinkName("SDL_LogDebug")]
@@ -422,7 +422,7 @@ namespace SDL2
 		[CRepr]
 		public struct MessageBoxColorScheme
 		{
-			public MessageBoxColor[(int)SDL_MessageBoxColorType.COUNT] colors;
+			public MessageBoxColor[(int32)SDL_MessageBoxColorType.COUNT] colors;
 		}
 
 		public struct Window;
@@ -434,7 +434,7 @@ namespace SDL2
 			public Window* window;/* Parent window, can be NULL */
 			public char8* title;/* UTF-8 title */
 			public char8* message;/* UTF-8 message text */
-			public int numbuttons;
+			public int32 numbuttons;
 			public MessageBoxButtonData* buttons;
 			public MessageBoxColorScheme* colorScheme;/* Can be NULL to use system settings */
 		}
@@ -444,7 +444,7 @@ namespace SDL2
 		public static extern int32 ShowMessageBox(ref MessageBoxData messageboxdata, out int32 buttonid);
 
 		[LinkName("ShowSimpleMessageBox")]
-		public static extern int SimpleMessageBox(
+		public static extern int32 SimpleMessageBox(
 			MessageBoxFlags flags,
 			char8* title,
 			char8* message,
@@ -455,11 +455,11 @@ namespace SDL2
 		 * running with. You will likely want to check this somewhere in your
 		 * program!
 		 */
-		public const int MAJOR_VERSION = 2;
-		public const int MINOR_VERSION = 0;
-		public const int PATCHLEVEL = 9;
+		public const int32 MAJOR_VERSION = 2;
+		public const int32 MINOR_VERSION = 0;
+		public const int32 PATCHLEVEL = 9;
 
-		public static readonly int COMPILEDVERSION = VERSIONNUM(
+		public static readonly int32 COMPILEDVERSION = VERSIONNUM(
 			MAJOR_VERSION,
 			MINOR_VERSION,
 			PATCHLEVEL
@@ -497,7 +497,7 @@ namespace SDL2
 		public static extern char8* GetRevision();
 
 		[LinkName("SDL_GetRevisionNumber")]
-		public static extern int GetRevisionNumber();
+		public static extern int32 GetRevisionNumber();
 
 		public enum SDL_GLAttr : uint32
 		{
@@ -655,7 +655,7 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_CreateWindowAndRenderer")]
-		public static extern int CreateWindowAndRenderer(
+		public static extern int32 CreateWindowAndRenderer(
 			WindowPos width,
 			WindowPos height,
 			WindowFlags window_flags,
@@ -680,15 +680,15 @@ namespace SDL2
 		/* IntPtr refers to an SDL_DisplayMode. Just use closest. */
 		[LinkName("SDL_GetClosestDisplayMode")]
 		public static extern SDL_DisplayMode* SDL_GetClosestDisplayMode(
-			int displayIndex,
+			int32 displayIndex,
 			ref SDL_DisplayMode mode,
 			out SDL_DisplayMode closest
 			);
 
 
 		[LinkName("SDL_GetCurrentDisplayMode")]
-		public static extern int SDL_GetCurrentDisplayMode(
-			int displayIndex,
+		public static extern int32 SDL_GetCurrentDisplayMode(
+			int32 displayIndex,
 			out SDL_DisplayMode mode
 			);
 
@@ -699,7 +699,7 @@ namespace SDL2
 		public static extern int32 GetDesktopDisplayMode(int32 displayIndex, out SDL_DisplayMode mode);
 
 		[LinkName("SDL_GetDisplayName")]
-		public static extern char8* GetDisplayName(int index);
+		public static extern char8* GetDisplayName(int32 index);
 
 		[LinkName("SDL_GetDisplayBounds")]
 		public static extern int32 GetDisplayBounds(int32 displayIndex, out Rect rect);
@@ -717,16 +717,16 @@ namespace SDL2
 
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_GetDisplayMode")]
-		public static extern int SDL_GetDisplayUsableBounds(int displayIndex, out Rect rect);
+		public static extern int32 SDL_GetDisplayUsableBounds(int32 displayIndex, out Rect rect);
 
 		[LinkName("SDL_GetNumDisplayModes")]
 		public static extern int32 GetNumDisplayModes(int32 displayIndex);
 
 		[LinkName("SDL_GetNumVideoDisplays")]
-		public static extern int SDL_GetNumVideoDisplays();
+		public static extern int32 SDL_GetNumVideoDisplays();
 
 		[LinkName("SDL_GetNumVideoDrivers")]
-		public static extern int SDL_GetNumVideoDrivers();
+		public static extern int32 SDL_GetNumVideoDrivers();
 
 		[LinkName("SDL_GetVideoDriver")]
 		public static extern char8* GetVideoDriver(int32 index);
@@ -744,12 +744,12 @@ namespace SDL2
 
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_SetWindowModalFor")]
-		public static extern int SDL_SetWindowModalFor(Window* modal_window, Window* parent_window);
+		public static extern int32 SDL_SetWindowModalFor(Window* modal_window, Window* parent_window);
 
 
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_SetWindowInputFocus")]
-		public static extern int SDL_SetWindowInputFocus(Window* window);
+		public static extern int32 SDL_SetWindowInputFocus(Window* window);
 
 		/* window refers to an SDL_Window*, IntPtr to a void* */
 		[LinkName("SDL_GetWindowData")]
@@ -757,10 +757,10 @@ namespace SDL2
 
 
 		[LinkName("SDL_GetWindowDisplayIndex")]
-		public static extern int SDL_GetWindowDisplayIndex(Window* window);
+		public static extern int32 SDL_GetWindowDisplayIndex(Window* window);
 
 		[LinkName("SDL_GetWindowDisplayMode")]
-		public static extern int GetWindowDisplayMode(Window* window, out SDL_DisplayMode mode);
+		public static extern int32 GetWindowDisplayMode(Window* window, out SDL_DisplayMode mode);
 
 		[LinkName("SDL_GetWindowFlags")]
 		public static extern uint32 GetWindowFlags(Window* window);
@@ -804,7 +804,7 @@ namespace SDL2
 		[LinkName("SDL_GL_BindTexture")]
 		public static extern int32 SDL_GL_BindTexture(Texture* texture, out float texw, out float texh);
 
-		public struct SDL_GLContext : int
+		public struct SDL_GLContext : int32
 		{
 		}
 
@@ -833,14 +833,14 @@ namespace SDL2
 		public static extern void GL_ResetAttributes();
 
 		[LinkName("SDL_GL_GetAttribute")]
-		public static extern int GL_GetAttribute(SDL_GLAttr attr, out int32 value);
+		public static extern int32 GL_GetAttribute(SDL_GLAttr attr, out int32 value);
 
 		[LinkName("SDL_GL_GetSwapInterval")]
-		public static extern int GL_GetSwapInterval();
+		public static extern int32 GL_GetSwapInterval();
 
 		/* window and context refer to an SDL_Window* and SDL_GLContext */
 		[LinkName("SDL_GL_MakeCurrent")]
-		public static extern int SDL_GL_MakeCurrent(Window* window, SDL_GLContext context);
+		public static extern int32 SDL_GL_MakeCurrent(Window* window, SDL_GLContext context);
 
 		/* IntPtr refers to an SDL_Window* */
 		[LinkName("SDL_GL_GetCurrentWindow")]
@@ -939,10 +939,10 @@ namespace SDL2
 		public static extern void ShowWindow(Window* window);
 
 		[LinkName("SDL_UpdateWindowSurface")]
-		public static extern int UpdateWindowSurface(Window* window);
+		public static extern int32 UpdateWindowSurface(Window* window);
 
 		[LinkName("SDL_UpdateWindowSurfaceRects")]
-		public static extern int UpdateWindowSurfaceRects(Window* window, Rect* rects, int numrects);
+		public static extern int32 UpdateWindowSurfaceRects(Window* window, Rect* rects, int32 numrects);
 
 		[LinkName("SDL_VideoInit")]
 		public static extern int32 VideoInit(char8* driver_name);
@@ -953,7 +953,7 @@ namespace SDL2
 		/* window refers to an SDL_Window*, callback_data to a void* */
 		/* Only available in 2.0.4 */
 		[LinkName("SDL_SetWindowHitTest")]
-		public static extern int SetWindowHitTest(Window* window, SDL_HitTest callback, void* callback_data);
+		public static extern int32 SetWindowHitTest(Window* window, SDL_HitTest callback, void* callback_data);
 
 		/* Only available in 2.0.4 */
 		[LinkName("SDL_GetGrabbedWindow")]
@@ -1019,11 +1019,11 @@ namespace SDL2
 		[LinkName("SDL_Vulkan_GetInstanceExtensions")]
 		public static extern Bool Vulkan_GetInstanceExtensions(Window* window, out uint32 pCount, char8** pNames);
 
-		public struct VkInstance : int
+		public struct VkInstance : int32
 		{
 		}
 
-		public struct VkSurfaceKHR : int
+		public struct VkSurfaceKHR : int32
 		{
 		}
 
@@ -1077,8 +1077,8 @@ namespace SDL2
 			public uint32 flags;
 			public uint32 num_texture_formats;
 			public uint32[16] texture_formats;
-			public int max_texture_width;
-			public int max_texture_height;
+			public int32 max_texture_width;
+			public int32 max_texture_height;
 		}
 
 		/* IntPtr refers to an SDL_Renderer*, window to an SDL_Window* */
@@ -1117,10 +1117,10 @@ namespace SDL2
 
 
 		[LinkName("SDL_GetRenderDrawColor")]
-		public static extern int GetRenderDrawColor(Renderer* renderer, out uint8 r, out uint8 g, out uint8 b, out uint8 a);
+		public static extern int32 GetRenderDrawColor(Renderer* renderer, out uint8 r, out uint8 g, out uint8 b, out uint8 a);
 
 		[LinkName("SDL_GetRenderDriverInfo")]
-		public static extern int GetRenderDriverInfo(int index, out RendererInfo info);
+		public static extern int32 GetRenderDriverInfo(int32 index, out RendererInfo info);
 
 		[LinkName("SDL_GetRenderer")]
 		public static extern Renderer* GetRenderer(Window* window);
@@ -1129,7 +1129,7 @@ namespace SDL2
 		public static extern int32 GetRendererInfo(Renderer* renderer, out RendererInfo info);
 
 		[LinkName("SDL_GetRendererOutputSize")]
-		public static extern int32 GetRendererOutputSize(Renderer* renderer, out int w, out int h);
+		public static extern int32 GetRendererOutputSize(Renderer* renderer, out int32 w, out int32 h);
 
 		[LinkName("SDL_GetTextureAlphaMod")]
 		public static extern int32 GetTextureAlphaMod(Texture* texture, out uint8 alpha);
@@ -1151,7 +1151,7 @@ namespace SDL2
 
 
 		[LinkName("SDL_QueryTexture")]
-		public static extern int QueryTexture(
+		public static extern int32 QueryTexture(
 			Texture* texture,
 			out uint32 format,
 			out int32 access,
@@ -1161,10 +1161,10 @@ namespace SDL2
 
 
 		[LinkName("SDL_RenderClear")]
-		public static extern int RenderClear(Renderer* renderer);
+		public static extern int32 RenderClear(Renderer* renderer);
 
 		[LinkName("SDL_RenderCopy")]
-		public static extern int RenderCopy(
+		public static extern int32 RenderCopy(
 			Renderer* renderer,
 			Texture* texture,
 			Rect* srcrect,
@@ -1172,7 +1172,7 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_RenderCopyEx")]
-		public static extern int RenderCopyEx(
+		public static extern int32 RenderCopyEx(
 			Renderer* renderer,
 			Texture* texture,
 			Rect* srcrect,
@@ -1183,7 +1183,7 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_RenderDrawLine")]
-		public static extern int RenderDrawLine(
+		public static extern int32 RenderDrawLine(
 			Renderer* renderer,
 			int32 x1,
 			int32 y1,
@@ -1192,47 +1192,47 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_RenderDrawLines")]
-		public static extern int RenderDrawLines(
+		public static extern int32 RenderDrawLines(
 			Renderer* renderer,
 			Point* points,
 			int32 count
 			);
 
 		[LinkName("SDL_RenderDrawPoint")]
-		public static extern int RenderDrawPoint(
+		public static extern int32 RenderDrawPoint(
 			Renderer* renderer,
 			int32 x,
 			int32 y
 			);
 
 		[LinkName("SDL_RenderDrawPoints")]
-		public static extern int RenderDrawPoints(
+		public static extern int32 RenderDrawPoints(
 			Renderer* renderer,
 			Point** points,
 			int32 count
 			);
 
 		[LinkName("SDL_RenderDrawRect")]
-		public static extern int RenderDrawRect(
+		public static extern int32 RenderDrawRect(
 			Renderer* renderer,
 			Rect* rect
 			);
 
 		[LinkName("SDL_RenderDrawRects")]
-		public static extern int RenderDrawRects(
+		public static extern int32 RenderDrawRects(
 			Renderer* renderer,
 			Rect** rects,
 			int32 count
 			);
 
 		[LinkName("SDL_RenderFillRect")]
-		public static extern int RenderFillRect(
+		public static extern int32 RenderFillRect(
 			Renderer* renderer,
 			Rect* rect
 			);
 
 		[LinkName("SDL_RenderFillRects")]
-		public static extern int RenderFillRects(
+		public static extern int32 RenderFillRects(
 			Renderer* renderer,
 			Rect** rects,
 			int32 count
@@ -1260,7 +1260,7 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_RenderGetViewport")]
-		public static extern int RenderGetViewport(
+		public static extern int32 RenderGetViewport(
 			Renderer* renderer,
 			out Rect rect
 			);
@@ -1269,7 +1269,7 @@ namespace SDL2
 		public static extern void RenderPresent(Renderer* renderer);
 
 		[LinkName("SDL_RenderReadPixels")]
-		public static extern int RenderReadPixels(
+		public static extern int32 RenderReadPixels(
 			Renderer* renderer,
 			Rect* rect,
 			uint32 format,
@@ -1278,20 +1278,20 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_RenderSetClipRect")]
-		public static extern int RenderSetClipRect(
+		public static extern int32 RenderSetClipRect(
 			Renderer* renderer,
 			Rect* rect
 			);
 
 		[LinkName("SDL_RenderSetLogicalSize")]
-		public static extern int RenderSetLogicalSize(
+		public static extern int32 RenderSetLogicalSize(
 			Renderer* renderer,
 			int32 w,
 			int32 h
 			);
 
 		[LinkName("SDL_RenderSetScale")]
-		public static extern int RenderSetScale(
+		public static extern int32 RenderSetScale(
 			Renderer* renderer,
 			float scaleX,
 			float scaleY
@@ -1299,28 +1299,28 @@ namespace SDL2
 
 		/* Available in 2.0.5 or higher */
 		[LinkName("SDL_RenderSetIntegerScale")]
-		public static extern int RenderSetIntegerScale(
+		public static extern int32 RenderSetIntegerScale(
 			Renderer* renderer,
 			Bool enable
 			);
 
 
 		[LinkName("SDL_RenderSetViewport")]
-		public static extern int RenderSetViewport(
+		public static extern int32 RenderSetViewport(
 			Renderer* renderer,
 			Rect* rect
 			);
 
 
 		[LinkName("SDL_SetRenderDrawBlendMode")]
-		public static extern int SetRenderDrawBlendMode(
+		public static extern int32 SetRenderDrawBlendMode(
 			Renderer* renderer,
 			BlendMode blendMode
 			);
 
 
 		[LinkName("SDL_SetRenderDrawColor")]
-		public static extern int SetRenderDrawColor(
+		public static extern int32 SetRenderDrawColor(
 			Renderer* renderer,
 			uint8 r,
 			uint8 g,
@@ -1329,25 +1329,25 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_SetRenderTarget")]
-		public static extern int SetRenderTarget(
+		public static extern int32 SetRenderTarget(
 			Renderer* renderer,
 			Texture* texture
 			);
 
 		[LinkName("SDL_SetTextureAlphaMod")]
-		public static extern int SetTextureAlphaMod(
+		public static extern int32 SetTextureAlphaMod(
 			Texture* texture,
 			uint8 alpha
 			);
 
 		[LinkName("SDL_SetTextureBlendMode")]
-		public static extern int SetTextureBlendMode(
+		public static extern int32 SetTextureBlendMode(
 			Texture* texture,
 			BlendMode blendMode
 			);
 
 		[LinkName("SDL_SetTextureColorMod")]
-		public static extern int SetTextureColorMod(
+		public static extern int32 SetTextureColorMod(
 			Texture* texture,
 			uint8 r,
 			uint8 g,
@@ -1358,15 +1358,7 @@ namespace SDL2
 		public static extern void UnlockTexture(Texture* texture);
 
 		[LinkName("SDL_UpdateTexture")]
-		public static extern int UpdateTexture(
-			Texture* texture,
-			Rect* rect,
-			void* pixels,
-			int pitch
-			);
-
-		[LinkName("SDL_UpdateTexture")]
-		public static extern int UpdateTexture(
+		public static extern int32 UpdateTexture(
 			Texture* texture,
 			Rect* rect,
 			void* pixels,
@@ -1375,7 +1367,7 @@ namespace SDL2
 
 		/* Available in 2.0.1 or higher */
 		[LinkName("SDL_UpdateYUVTexture")]
-		public static extern int UpdateYUVTexture(
+		public static extern int32 UpdateYUVTexture(
 			Texture* texture,
 			Rect* rect,
 			uint8* yPlane,
@@ -1857,7 +1849,7 @@ namespace SDL2
 
 		/* IntPtr refers to an SDL_Palette* */
 		[LinkName("SDL_AllocPalette")]
-		public static extern Palette* AllocPalette(int ncolors);
+		public static extern Palette* AllocPalette(int32 ncolors);
 
 		[LinkName("SDL_CalculateGammaRamp")]
 		public static extern void CalculateGammaRamp(
@@ -1937,7 +1929,7 @@ namespace SDL2
 
 		/* palette refers to an SDL_Palette* */
 		[LinkName("SDL_SetPaletteColors")]
-		public static extern int SetPaletteColors(
+		public static extern int32 SetPaletteColors(
 			Palette* palette,
 			Color* colors,
 			int32 firstcolor,
@@ -1946,7 +1938,7 @@ namespace SDL2
 
 		/* format and palette refer to an SDL_PixelFormat* and SDL_Palette* */
 		[LinkName("SDL_SetPixelFormatPalette")]
-		public static extern int SetPixelFormatPalette(
+		public static extern int32 SetPixelFormatPalette(
 			PixelFormat* format,
 			Palette* palette
 			);
@@ -2086,7 +2078,7 @@ namespace SDL2
 			public void* lock_data;// void*
 			public Rect clip_rect;
 			public SDL_BlitMap* map;// SDL_BlitMap*
-			public int refcount;
+			public int32 refcount;
 		}
 
 		/* surface refers to an SDL_Surface* */
@@ -2102,7 +2094,7 @@ namespace SDL2
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_UpperBlit")]
-		public static extern int SDL_BlitSurface(
+		public static extern int32 SDL_BlitSurface(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2111,7 +2103,7 @@ namespace SDL2
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_UpperBlitScaled")]
-		public static extern int SDL_BlitScaled(
+		public static extern int32 SDL_BlitScaled(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2120,7 +2112,7 @@ namespace SDL2
 
 		/* src and dst are void* pointers */
 		[LinkName("SDL_ConvertPixels")]
-		public static extern int ConvertPixels(
+		public static extern int32 ConvertPixels(
 			int32 width,
 			int32 height,
 			uint32 src_format,
@@ -2202,7 +2194,7 @@ namespace SDL2
 
 		/* dst refers to an SDL_Surface* */
 		[LinkName("SDL_FillRect")]
-		public static extern int FillRect(
+		public static extern int32 FillRect(
 			Surface* dst,
 			Rect* rect,
 			uint32 color
@@ -2210,7 +2202,7 @@ namespace SDL2
 
 		/* dst refers to an SDL_Surface* */
 		[LinkName("SDL_FillRects")]
-		public static extern int FillRects(
+		public static extern int32 FillRects(
 			Surface* dst,
 			Rect* rects,
 			int32 count,
@@ -2236,28 +2228,28 @@ namespace SDL2
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetColorKey")]
-		public static extern int GetColorKey(
+		public static extern int32 GetColorKey(
 			Surface* surface,
 			out uint32 key
 			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetSurfaceAlphaMod")]
-		public static extern int GetSurfaceAlphaMod(
+		public static extern int32 GetSurfaceAlphaMod(
 			Surface* surface,
 			out uint8 alpha
 			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetSurfaceBlendMode")]
-		public static extern int GetSurfaceBlendMode(
+		public static extern int32 GetSurfaceBlendMode(
 			Surface* surface,
 			out BlendMode blendMode
 			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_GetSurfaceColorMod")]
-		public static extern int GetSurfaceColorMod(
+		public static extern int32 GetSurfaceColorMod(
 			Surface* surface,
 			out uint8 r,
 			out uint8 g,
@@ -2267,7 +2259,7 @@ namespace SDL2
 		[LinkName("SDL_LoadBMP_RW")]
 		private static extern Surface* LoadBMP_RW(
 			RWOps* src,
-			int freesrc
+			int32 freesrc
 			);
 
 		public static Surface* SDL_LoadBMP(char8* file)
@@ -2278,11 +2270,11 @@ namespace SDL2
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_LockSurface")]
-		public static extern int LockSurface(Surface* surface);
+		public static extern int32 LockSurface(Surface* surface);
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_LowerBlit")]
-		public static extern int LowerBlit(
+		public static extern int32 LowerBlit(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2291,7 +2283,7 @@ namespace SDL2
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_LowerBlitScaled")]
-		public static extern int LowerBlitScaled(
+		public static extern int32 LowerBlitScaled(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2302,13 +2294,13 @@ namespace SDL2
 		/* IntPtr refers to an SDL_Surface* */
 		/* THIS IS AN RWops FUNCTION! */
 		[LinkName("SDL_SaveBMP_RW")]
-		private static extern int SaveBMP_RW(
+		private static extern int32 SaveBMP_RW(
 			Surface* surface,
 			RWOps* dst,
-			int freedst
+			int32 freedst
 			);
 
-		public static int SDL_SaveBMP(Surface* surface, char8* file)
+		public static int32 SDL_SaveBMP(Surface* surface, char8* file)
 		{
 			RWOps* rwops = RWFromFile(file, "wb");
 			return SaveBMP_RW(surface, rwops, 1);
@@ -2323,7 +2315,7 @@ namespace SDL2
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetColorKey")]
-		public static extern int SetColorKey(
+		public static extern int32 SetColorKey(
 			Surface* surface,
 			int32 flag,
 			uint32 key
@@ -2331,21 +2323,21 @@ namespace SDL2
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceAlphaMod")]
-		public static extern int SetSurfaceAlphaMod(
+		public static extern int32 SetSurfaceAlphaMod(
 			Surface* surface,
 			uint8 alpha
 			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceBlendMode")]
-		public static extern int SetSurfaceBlendMode(
+		public static extern int32 SetSurfaceBlendMode(
 			Surface* surface,
 			BlendMode blendMode
 			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceColorMod")]
-		public static extern int SetSurfaceColorMod(
+		public static extern int32 SetSurfaceColorMod(
 			Surface* surface,
 			uint8 r,
 			uint8 g,
@@ -2354,21 +2346,21 @@ namespace SDL2
 
 		/* surface refers to an SDL_Surface*, palette to an SDL_Palette* */
 		[LinkName("SDL_SetSurfacePalette")]
-		public static extern int SetSurfacePalette(
+		public static extern int32 SetSurfacePalette(
 			Surface* surface,
 			Palette* palette
 			);
 
 		/* surface refers to an SDL_Surface* */
 		[LinkName("SDL_SetSurfaceRLE")]
-		public static extern int SetSurfaceRLE(
+		public static extern int32 SetSurfaceRLE(
 			Surface* surface,
 			int32 flag
 			);
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_SoftStretch")]
-		public static extern int SoftStretch(
+		public static extern int32 SoftStretch(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2381,7 +2373,7 @@ namespace SDL2
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_UpperBlit")]
-		public static extern int UpperBlit(
+		public static extern int32 UpperBlit(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2390,7 +2382,7 @@ namespace SDL2
 
 		/* src and dst refer to an SDL_Surface* */
 		[LinkName("SDL_UpperBlitScaled")]
-		public static extern int UpperBlitScaled(
+		public static extern int32 UpperBlitScaled(
 			Surface* src,
 			Rect* srcrect,
 			Surface* dst,
@@ -2872,7 +2864,7 @@ namespace SDL2
 			public DropEvent drop;
 		}
 
-		public function int EventFilter(
+		public function int32 EventFilter(
 			void* userdata,// void*
 			Event* sdlevent// SDL_Event* event, lolC#
 			);
@@ -2889,7 +2881,7 @@ namespace SDL2
 		}
 
 		[LinkName("SDL_PeepEvents")]
-		public static extern int PeepEvents(
+		public static extern int32 PeepEvents(
 			Event* events,
 			int32 numevents,
 			EventAction action,
@@ -3259,10 +3251,10 @@ namespace SDL2
 			NUMSCANCODES = 512
 		}
 
-		public const int SCANCODE_MASK = (1 << 30);
+		public const int32 SCANCODE_MASK = (1 << 30);
 		public static Keycode SCANCODE_TO_KEYCODE(Scancode X)
 		{
-			return (Keycode)((int)X | SCANCODE_MASK);
+			return (Keycode)((int32)X | SCANCODE_MASK);
 		}
 
 		/* So, in the C headers, SDL_Keycode is a typedef of Sint32
@@ -3347,184 +3339,184 @@ namespace SDL2
 			Y = (.)'y',
 			Z = (.)'z',
 
-			CAPSLOCK = (int)Scancode.CapsLock | SCANCODE_MASK,
+			CAPSLOCK = (int32)Scancode.CapsLock | SCANCODE_MASK,
 
-			F1 = (int)Scancode.F1 | SCANCODE_MASK,
-			F2 = (int)Scancode.F2 | SCANCODE_MASK,
-			F3 = (int)Scancode.F3 | SCANCODE_MASK,
-			F4 = (int)Scancode.F4 | SCANCODE_MASK,
-			F5 = (int)Scancode.F5 | SCANCODE_MASK,
-			F6 = (int)Scancode.F6 | SCANCODE_MASK,
-			F7 = (int)Scancode.F7 | SCANCODE_MASK,
-			F8 = (int)Scancode.F8 | SCANCODE_MASK,
-			F9 = (int)Scancode.F9 | SCANCODE_MASK,
-			F10 = (int)Scancode.F10 | SCANCODE_MASK,
-			F11 = (int)Scancode.F11 | SCANCODE_MASK,
-			F12 = (int)Scancode.F12 | SCANCODE_MASK,
+			F1 = (int32)Scancode.F1 | SCANCODE_MASK,
+			F2 = (int32)Scancode.F2 | SCANCODE_MASK,
+			F3 = (int32)Scancode.F3 | SCANCODE_MASK,
+			F4 = (int32)Scancode.F4 | SCANCODE_MASK,
+			F5 = (int32)Scancode.F5 | SCANCODE_MASK,
+			F6 = (int32)Scancode.F6 | SCANCODE_MASK,
+			F7 = (int32)Scancode.F7 | SCANCODE_MASK,
+			F8 = (int32)Scancode.F8 | SCANCODE_MASK,
+			F9 = (int32)Scancode.F9 | SCANCODE_MASK,
+			F10 = (int32)Scancode.F10 | SCANCODE_MASK,
+			F11 = (int32)Scancode.F11 | SCANCODE_MASK,
+			F12 = (int32)Scancode.F12 | SCANCODE_MASK,
 
-			PRINTSCREEN = (int)Scancode.PrintScreen | SCANCODE_MASK,
-			SCROLLLOCK = (int)Scancode.ScrollLock | SCANCODE_MASK,
-			PAUSE = (int)Scancode.Pause | SCANCODE_MASK,
-			INSERT = (int)Scancode.Insert | SCANCODE_MASK,
-			HOME = (int)Scancode.Home | SCANCODE_MASK,
-			PAGEUP = (int)Scancode.Pageup | SCANCODE_MASK,
+			PRINTSCREEN = (int32)Scancode.PrintScreen | SCANCODE_MASK,
+			SCROLLLOCK = (int32)Scancode.ScrollLock | SCANCODE_MASK,
+			PAUSE = (int32)Scancode.Pause | SCANCODE_MASK,
+			INSERT = (int32)Scancode.Insert | SCANCODE_MASK,
+			HOME = (int32)Scancode.Home | SCANCODE_MASK,
+			PAGEUP = (int32)Scancode.Pageup | SCANCODE_MASK,
 			DELETE = 127,
-			END = (int)Scancode.End | SCANCODE_MASK,
-			PAGEDOWN = (int)Scancode.PageDown | SCANCODE_MASK,
-			RIGHT = (int)Scancode.Right | SCANCODE_MASK,
-			LEFT = (int)Scancode.Left | SCANCODE_MASK,
-			DOWN = (int)Scancode.Down | SCANCODE_MASK,
-			UP = (int)Scancode.Up | SCANCODE_MASK,
+			END = (int32)Scancode.End | SCANCODE_MASK,
+			PAGEDOWN = (int32)Scancode.PageDown | SCANCODE_MASK,
+			RIGHT = (int32)Scancode.Right | SCANCODE_MASK,
+			LEFT = (int32)Scancode.Left | SCANCODE_MASK,
+			DOWN = (int32)Scancode.Down | SCANCODE_MASK,
+			UP = (int32)Scancode.Up | SCANCODE_MASK,
 
-			NUMLOCKCLEAR = (int)Scancode.NumLockClear | SCANCODE_MASK,
-			KP_DIVIDE = (int)Scancode.KpDivide | SCANCODE_MASK,
-			KPMULTIPLY = (int)Scancode.KpMultiply | SCANCODE_MASK,
-			KPMINUS = (int)Scancode.KpMinus | SCANCODE_MASK,
-			KPPLUS = (int)Scancode.KpPlus | SCANCODE_MASK,
-			KPENTER = (int)Scancode.KpEnter | SCANCODE_MASK,
-			KP1 = (int)Scancode.Kp1 | SCANCODE_MASK,
-			KP2 = (int)Scancode.Kp2 | SCANCODE_MASK,
-			KP3 = (int)Scancode.Kp3 | SCANCODE_MASK,
-			KP4 = (int)Scancode.Kp4 | SCANCODE_MASK,
-			KP5 = (int)Scancode.Kp5 | SCANCODE_MASK,
-			KP6 = (int)Scancode.Kp6 | SCANCODE_MASK,
-			KP7 = (int)Scancode.Kp7 | SCANCODE_MASK,
-			KP8 = (int)Scancode.Kp8 | SCANCODE_MASK,
-			KP9 = (int)Scancode.Kp9 | SCANCODE_MASK,
-			KP0 = (int)Scancode.Kp0 | SCANCODE_MASK,
-			KPPERIOD = (int)Scancode.Kpperiod | SCANCODE_MASK,
+			NUMLOCKCLEAR = (int32)Scancode.NumLockClear | SCANCODE_MASK,
+			KP_DIVIDE = (int32)Scancode.KpDivide | SCANCODE_MASK,
+			KPMULTIPLY = (int32)Scancode.KpMultiply | SCANCODE_MASK,
+			KPMINUS = (int32)Scancode.KpMinus | SCANCODE_MASK,
+			KPPLUS = (int32)Scancode.KpPlus | SCANCODE_MASK,
+			KPENTER = (int32)Scancode.KpEnter | SCANCODE_MASK,
+			KP1 = (int32)Scancode.Kp1 | SCANCODE_MASK,
+			KP2 = (int32)Scancode.Kp2 | SCANCODE_MASK,
+			KP3 = (int32)Scancode.Kp3 | SCANCODE_MASK,
+			KP4 = (int32)Scancode.Kp4 | SCANCODE_MASK,
+			KP5 = (int32)Scancode.Kp5 | SCANCODE_MASK,
+			KP6 = (int32)Scancode.Kp6 | SCANCODE_MASK,
+			KP7 = (int32)Scancode.Kp7 | SCANCODE_MASK,
+			KP8 = (int32)Scancode.Kp8 | SCANCODE_MASK,
+			KP9 = (int32)Scancode.Kp9 | SCANCODE_MASK,
+			KP0 = (int32)Scancode.Kp0 | SCANCODE_MASK,
+			KPPERIOD = (int32)Scancode.Kpperiod | SCANCODE_MASK,
 
-			APPLICATION = (int)Scancode.Application | SCANCODE_MASK,
-			POWER = (int)Scancode.Power | SCANCODE_MASK,
-			KPEQUALS = (int)Scancode.KpEquals | SCANCODE_MASK,
-			F13 = (int)Scancode.F13 | SCANCODE_MASK,
-			F14 = (int)Scancode.F14 | SCANCODE_MASK,
-			F15 = (int)Scancode.F15 | SCANCODE_MASK,
-			F16 = (int)Scancode.F16 | SCANCODE_MASK,
-			F17 = (int)Scancode.F17 | SCANCODE_MASK,
-			F18 = (int)Scancode.F18 | SCANCODE_MASK,
-			F19 = (int)Scancode.F19 | SCANCODE_MASK,
-			F20 = (int)Scancode.F20 | SCANCODE_MASK,
-			F21 = (int)Scancode.F21 | SCANCODE_MASK,
-			F22 = (int)Scancode.F22 | SCANCODE_MASK,
-			F23 = (int)Scancode.F23 | SCANCODE_MASK,
-			F24 = (int)Scancode.F24 | SCANCODE_MASK,
-			EXECUTE = (int)Scancode.Execute | SCANCODE_MASK,
-			HELP = (int)Scancode.Help | SCANCODE_MASK,
-			MENU = (int)Scancode.Menu | SCANCODE_MASK,
-			SELECT = (int)Scancode.Select | SCANCODE_MASK,
-			STOP = (int)Scancode.Stop | SCANCODE_MASK,
-			AGAIN = (int)Scancode.Again | SCANCODE_MASK,
-			UNDO = (int)Scancode.Undo | SCANCODE_MASK,
-			CUT = (int)Scancode.Cut | SCANCODE_MASK,
-			COPY = (int)Scancode.Copy | SCANCODE_MASK,
-			PASTE = (int)Scancode.Paste | SCANCODE_MASK,
-			FIND = (int)Scancode.Find | SCANCODE_MASK,
-			MUTE = (int)Scancode.Mute | SCANCODE_MASK,
-			VOLUMEUP = (int)Scancode.Volumeup | SCANCODE_MASK,
-			VOLUMEDOWN = (int)Scancode.Volumedown | SCANCODE_MASK,
-			KP_COMMA = (int)Scancode.KpComma | SCANCODE_MASK,
-			KP_EQUALSAS400 = (int)Scancode.KpEqualsAS400 | SCANCODE_MASK,
+			APPLICATION = (int32)Scancode.Application | SCANCODE_MASK,
+			POWER = (int32)Scancode.Power | SCANCODE_MASK,
+			KPEQUALS = (int32)Scancode.KpEquals | SCANCODE_MASK,
+			F13 = (int32)Scancode.F13 | SCANCODE_MASK,
+			F14 = (int32)Scancode.F14 | SCANCODE_MASK,
+			F15 = (int32)Scancode.F15 | SCANCODE_MASK,
+			F16 = (int32)Scancode.F16 | SCANCODE_MASK,
+			F17 = (int32)Scancode.F17 | SCANCODE_MASK,
+			F18 = (int32)Scancode.F18 | SCANCODE_MASK,
+			F19 = (int32)Scancode.F19 | SCANCODE_MASK,
+			F20 = (int32)Scancode.F20 | SCANCODE_MASK,
+			F21 = (int32)Scancode.F21 | SCANCODE_MASK,
+			F22 = (int32)Scancode.F22 | SCANCODE_MASK,
+			F23 = (int32)Scancode.F23 | SCANCODE_MASK,
+			F24 = (int32)Scancode.F24 | SCANCODE_MASK,
+			EXECUTE = (int32)Scancode.Execute | SCANCODE_MASK,
+			HELP = (int32)Scancode.Help | SCANCODE_MASK,
+			MENU = (int32)Scancode.Menu | SCANCODE_MASK,
+			SELECT = (int32)Scancode.Select | SCANCODE_MASK,
+			STOP = (int32)Scancode.Stop | SCANCODE_MASK,
+			AGAIN = (int32)Scancode.Again | SCANCODE_MASK,
+			UNDO = (int32)Scancode.Undo | SCANCODE_MASK,
+			CUT = (int32)Scancode.Cut | SCANCODE_MASK,
+			COPY = (int32)Scancode.Copy | SCANCODE_MASK,
+			PASTE = (int32)Scancode.Paste | SCANCODE_MASK,
+			FIND = (int32)Scancode.Find | SCANCODE_MASK,
+			MUTE = (int32)Scancode.Mute | SCANCODE_MASK,
+			VOLUMEUP = (int32)Scancode.Volumeup | SCANCODE_MASK,
+			VOLUMEDOWN = (int32)Scancode.Volumedown | SCANCODE_MASK,
+			KP_COMMA = (int32)Scancode.KpComma | SCANCODE_MASK,
+			KP_EQUALSAS400 = (int32)Scancode.KpEqualsAS400 | SCANCODE_MASK,
 
-			ALTERASE = (int)Scancode.AltErase | SCANCODE_MASK,
-			SYSREQ = (int)Scancode.SysReq | SCANCODE_MASK,
-			CANCEL = (int)Scancode.Cancel | SCANCODE_MASK,
-			CLEAR = (int)Scancode.Clear | SCANCODE_MASK,
-			PRIOR = (int)Scancode.Prior | SCANCODE_MASK,
-			RETURN2 = (int)Scancode.Return2 | SCANCODE_MASK,
-			SEPARATOR = (int)Scancode.Separator | SCANCODE_MASK,
-			OUT = (int)Scancode.Out | SCANCODE_MASK,
-			OPER = (int)Scancode.Oper | SCANCODE_MASK,
-			CLEARAGAIN = (int)Scancode.ClearAgain | SCANCODE_MASK,
-			CRSEL = (int)Scancode.CrSel | SCANCODE_MASK,
-			EXSEL = (int)Scancode.ExSel | SCANCODE_MASK,
+			ALTERASE = (int32)Scancode.AltErase | SCANCODE_MASK,
+			SYSREQ = (int32)Scancode.SysReq | SCANCODE_MASK,
+			CANCEL = (int32)Scancode.Cancel | SCANCODE_MASK,
+			CLEAR = (int32)Scancode.Clear | SCANCODE_MASK,
+			PRIOR = (int32)Scancode.Prior | SCANCODE_MASK,
+			RETURN2 = (int32)Scancode.Return2 | SCANCODE_MASK,
+			SEPARATOR = (int32)Scancode.Separator | SCANCODE_MASK,
+			OUT = (int32)Scancode.Out | SCANCODE_MASK,
+			OPER = (int32)Scancode.Oper | SCANCODE_MASK,
+			CLEARAGAIN = (int32)Scancode.ClearAgain | SCANCODE_MASK,
+			CRSEL = (int32)Scancode.CrSel | SCANCODE_MASK,
+			EXSEL = (int32)Scancode.ExSel | SCANCODE_MASK,
 
-			KP00 = (int)Scancode.Kp00 | SCANCODE_MASK,
-			KP000 = (int)Scancode.Kp00 | SCANCODE_MASK,
-			THOUSANDSSEPARATOR = (int)Scancode.Thousandsseparator | SCANCODE_MASK,
-			DECIMALSEPARATOR = (int)Scancode.Decimalseparator | SCANCODE_MASK,
-			CURRENCYUNIT = (int)Scancode.Currencyunit | SCANCODE_MASK,
-			CURRENCYSUBUNIT = (int)Scancode.Currencysubunit | SCANCODE_MASK,
-			KPLEFTPAREN = (int)Scancode.Kpleftparen | SCANCODE_MASK,
-			KPRIGHTPAREN = (int)Scancode.Kprightparen | SCANCODE_MASK,
-			KPLEFTBRACE = (int)Scancode.Kpleftbrace | SCANCODE_MASK,
-			KPRIGHTBRACE = (int)Scancode.Kprightbrace | SCANCODE_MASK,
-			KPTAB = (int)Scancode.Kptab | SCANCODE_MASK,
-			KPBACKSPACE = (int)Scancode.Kpbackspace | SCANCODE_MASK,
-			KPA = (int)Scancode.KPA | SCANCODE_MASK,
-			KPB = (int)Scancode.KPB | SCANCODE_MASK,
-			KPC = (int)Scancode.KPC | SCANCODE_MASK,
-			KPD = (int)Scancode.KPD | SCANCODE_MASK,
-			KPE = (int)Scancode.KPE | SCANCODE_MASK,
-			KPF = (int)Scancode.KPF | SCANCODE_MASK,
-			KPXOR = (int)Scancode.KpXor | SCANCODE_MASK,
-			KPPOWER = (int)Scancode.KpPower | SCANCODE_MASK,
-			KPPERCENT = (int)Scancode.KpPercent | SCANCODE_MASK,
-			KPLESS = (int)Scancode.KpLess | SCANCODE_MASK,
-			KPGREATER = (int)Scancode.KpGreater | SCANCODE_MASK,
-			KPAMPERSAND = (int)Scancode.KpAmpersand | SCANCODE_MASK,
-			KPDBLAMPERSAND = (int)Scancode.KpdBlAmpersand | SCANCODE_MASK,
-			KPVERTICALBAR = (int)Scancode.KpVerticalBar | SCANCODE_MASK,
-			KPDBLVERTICALBAR = (int)Scancode.KpDblVerticalBar | SCANCODE_MASK,
-			KPCOLON = (int)Scancode.KpColon | SCANCODE_MASK,
-			KPHASH = (int)Scancode.KpHash | SCANCODE_MASK,
-			KPSPACE = (int)Scancode.KpSpace | SCANCODE_MASK,
-			KPAT = (int)Scancode.KPA | SCANCODE_MASK,
-			KPEXCLAM = (int)Scancode.KpExclam | SCANCODE_MASK,
-			KPMEMSTORE = (int)Scancode.KpMemstore | SCANCODE_MASK,
-			KPMEMRECALL = (int)Scancode.KpMemrecall | SCANCODE_MASK,
-			KPMEMCLEAR = (int)Scancode.KpMemclear | SCANCODE_MASK,
-			KPMEMADD = (int)Scancode.KpMemadd | SCANCODE_MASK,
-			KPMEMSUBTRACT = (int)Scancode.KpMemsubtract | SCANCODE_MASK,
-			KPMEMMULTIPLY = (int)Scancode.KpMemmultiply | SCANCODE_MASK,
-			KPMEMDIVIDE = (int)Scancode.KpMemdivide | SCANCODE_MASK,
-			KPPLUSMINUS = (int)Scancode.KpPlusminus | SCANCODE_MASK,
-			KPCLEAR = (int)Scancode.KpClear | SCANCODE_MASK,
-			KPCLEARENTRY = (int)Scancode.KpClearentry | SCANCODE_MASK,
-			KPBINARY = (int)Scancode.KpBinary | SCANCODE_MASK,
-			KPOCTAL = (int)Scancode.KpOctal | SCANCODE_MASK,
-			KPDECIMAL = (int)Scancode.KpDecimal | SCANCODE_MASK,
-			KPHEXADECIMAL = (int)Scancode.KpHexadecimal | SCANCODE_MASK,
+			KP00 = (int32)Scancode.Kp00 | SCANCODE_MASK,
+			KP000 = (int32)Scancode.Kp00 | SCANCODE_MASK,
+			THOUSANDSSEPARATOR = (int32)Scancode.Thousandsseparator | SCANCODE_MASK,
+			DECIMALSEPARATOR = (int32)Scancode.Decimalseparator | SCANCODE_MASK,
+			CURRENCYUNIT = (int32)Scancode.Currencyunit | SCANCODE_MASK,
+			CURRENCYSUBUNIT = (int32)Scancode.Currencysubunit | SCANCODE_MASK,
+			KPLEFTPAREN = (int32)Scancode.Kpleftparen | SCANCODE_MASK,
+			KPRIGHTPAREN = (int32)Scancode.Kprightparen | SCANCODE_MASK,
+			KPLEFTBRACE = (int32)Scancode.Kpleftbrace | SCANCODE_MASK,
+			KPRIGHTBRACE = (int32)Scancode.Kprightbrace | SCANCODE_MASK,
+			KPTAB = (int32)Scancode.Kptab | SCANCODE_MASK,
+			KPBACKSPACE = (int32)Scancode.Kpbackspace | SCANCODE_MASK,
+			KPA = (int32)Scancode.KPA | SCANCODE_MASK,
+			KPB = (int32)Scancode.KPB | SCANCODE_MASK,
+			KPC = (int32)Scancode.KPC | SCANCODE_MASK,
+			KPD = (int32)Scancode.KPD | SCANCODE_MASK,
+			KPE = (int32)Scancode.KPE | SCANCODE_MASK,
+			KPF = (int32)Scancode.KPF | SCANCODE_MASK,
+			KPXOR = (int32)Scancode.KpXor | SCANCODE_MASK,
+			KPPOWER = (int32)Scancode.KpPower | SCANCODE_MASK,
+			KPPERCENT = (int32)Scancode.KpPercent | SCANCODE_MASK,
+			KPLESS = (int32)Scancode.KpLess | SCANCODE_MASK,
+			KPGREATER = (int32)Scancode.KpGreater | SCANCODE_MASK,
+			KPAMPERSAND = (int32)Scancode.KpAmpersand | SCANCODE_MASK,
+			KPDBLAMPERSAND = (int32)Scancode.KpdBlAmpersand | SCANCODE_MASK,
+			KPVERTICALBAR = (int32)Scancode.KpVerticalBar | SCANCODE_MASK,
+			KPDBLVERTICALBAR = (int32)Scancode.KpDblVerticalBar | SCANCODE_MASK,
+			KPCOLON = (int32)Scancode.KpColon | SCANCODE_MASK,
+			KPHASH = (int32)Scancode.KpHash | SCANCODE_MASK,
+			KPSPACE = (int32)Scancode.KpSpace | SCANCODE_MASK,
+			KPAT = (int32)Scancode.KPA | SCANCODE_MASK,
+			KPEXCLAM = (int32)Scancode.KpExclam | SCANCODE_MASK,
+			KPMEMSTORE = (int32)Scancode.KpMemstore | SCANCODE_MASK,
+			KPMEMRECALL = (int32)Scancode.KpMemrecall | SCANCODE_MASK,
+			KPMEMCLEAR = (int32)Scancode.KpMemclear | SCANCODE_MASK,
+			KPMEMADD = (int32)Scancode.KpMemadd | SCANCODE_MASK,
+			KPMEMSUBTRACT = (int32)Scancode.KpMemsubtract | SCANCODE_MASK,
+			KPMEMMULTIPLY = (int32)Scancode.KpMemmultiply | SCANCODE_MASK,
+			KPMEMDIVIDE = (int32)Scancode.KpMemdivide | SCANCODE_MASK,
+			KPPLUSMINUS = (int32)Scancode.KpPlusminus | SCANCODE_MASK,
+			KPCLEAR = (int32)Scancode.KpClear | SCANCODE_MASK,
+			KPCLEARENTRY = (int32)Scancode.KpClearentry | SCANCODE_MASK,
+			KPBINARY = (int32)Scancode.KpBinary | SCANCODE_MASK,
+			KPOCTAL = (int32)Scancode.KpOctal | SCANCODE_MASK,
+			KPDECIMAL = (int32)Scancode.KpDecimal | SCANCODE_MASK,
+			KPHEXADECIMAL = (int32)Scancode.KpHexadecimal | SCANCODE_MASK,
 
-			LCTRL = (int)Scancode.LCtrl | SCANCODE_MASK,
-			LSHIFT = (int)Scancode.LShift | SCANCODE_MASK,
-			LALT = (int)Scancode.LAlt | SCANCODE_MASK,
-			LGUI = (int)Scancode.LGui | SCANCODE_MASK,
-			RCTRL = (int)Scancode.RCtrl | SCANCODE_MASK,
-			RSHIFT = (int)Scancode.RShift | SCANCODE_MASK,
-			RALT = (int)Scancode.RAlt | SCANCODE_MASK,
-			RGUI = (int)Scancode.RGui | SCANCODE_MASK,
+			LCTRL = (int32)Scancode.LCtrl | SCANCODE_MASK,
+			LSHIFT = (int32)Scancode.LShift | SCANCODE_MASK,
+			LALT = (int32)Scancode.LAlt | SCANCODE_MASK,
+			LGUI = (int32)Scancode.LGui | SCANCODE_MASK,
+			RCTRL = (int32)Scancode.RCtrl | SCANCODE_MASK,
+			RSHIFT = (int32)Scancode.RShift | SCANCODE_MASK,
+			RALT = (int32)Scancode.RAlt | SCANCODE_MASK,
+			RGUI = (int32)Scancode.RGui | SCANCODE_MASK,
 
-			MODE = (int)Scancode.Mode | SCANCODE_MASK,
+			MODE = (int32)Scancode.Mode | SCANCODE_MASK,
 
-			AUDIONEXT = (int)Scancode.Audionext | SCANCODE_MASK,
-			AUDIOPREV = (int)Scancode.Audioprev | SCANCODE_MASK,
-			AUDIOSTOP = (int)Scancode.Audiostop | SCANCODE_MASK,
-			AUDIOPLAY = (int)Scancode.Audioplay | SCANCODE_MASK,
-			AUDIOMUTE = (int)Scancode.Audiomute | SCANCODE_MASK,
-			MEDIASELECT = (int)Scancode.Mediaselect | SCANCODE_MASK,
-			WWW = (int)Scancode.Www | SCANCODE_MASK,
-			MAIL = (int)Scancode.Mail | SCANCODE_MASK,
-			CALCULATOR = (int)Scancode.Calculator | SCANCODE_MASK,
-			COMPUTER = (int)Scancode.Computer | SCANCODE_MASK,
-			ACSEARCH = (int)Scancode.Acsearch | SCANCODE_MASK,
-			ACHOME = (int)Scancode.Achome | SCANCODE_MASK,
-			ACBACK = (int)Scancode.Acback | SCANCODE_MASK,
-			ACFORWARD = (int)Scancode.Acforward | SCANCODE_MASK,
-			ACSTOP = (int)Scancode.Acstop | SCANCODE_MASK,
-			ACREFRESH = (int)Scancode.Acrefresh | SCANCODE_MASK,
-			ACBOOKMARKS = (int)Scancode.Acbookmarks | SCANCODE_MASK,
+			AUDIONEXT = (int32)Scancode.Audionext | SCANCODE_MASK,
+			AUDIOPREV = (int32)Scancode.Audioprev | SCANCODE_MASK,
+			AUDIOSTOP = (int32)Scancode.Audiostop | SCANCODE_MASK,
+			AUDIOPLAY = (int32)Scancode.Audioplay | SCANCODE_MASK,
+			AUDIOMUTE = (int32)Scancode.Audiomute | SCANCODE_MASK,
+			MEDIASELECT = (int32)Scancode.Mediaselect | SCANCODE_MASK,
+			WWW = (int32)Scancode.Www | SCANCODE_MASK,
+			MAIL = (int32)Scancode.Mail | SCANCODE_MASK,
+			CALCULATOR = (int32)Scancode.Calculator | SCANCODE_MASK,
+			COMPUTER = (int32)Scancode.Computer | SCANCODE_MASK,
+			ACSEARCH = (int32)Scancode.Acsearch | SCANCODE_MASK,
+			ACHOME = (int32)Scancode.Achome | SCANCODE_MASK,
+			ACBACK = (int32)Scancode.Acback | SCANCODE_MASK,
+			ACFORWARD = (int32)Scancode.Acforward | SCANCODE_MASK,
+			ACSTOP = (int32)Scancode.Acstop | SCANCODE_MASK,
+			ACREFRESH = (int32)Scancode.Acrefresh | SCANCODE_MASK,
+			ACBOOKMARKS = (int32)Scancode.Acbookmarks | SCANCODE_MASK,
 
 			BRIGHTNESSDOWN =
-				(int)Scancode.Brightnessdown | SCANCODE_MASK,
-			BRIGHTNESSUP = (int)Scancode.Brightnessup | SCANCODE_MASK,
-			DISPLAYSWITCH = (int)Scancode.Displayswitch | SCANCODE_MASK,
+				(int32)Scancode.Brightnessdown | SCANCODE_MASK,
+			BRIGHTNESSUP = (int32)Scancode.Brightnessup | SCANCODE_MASK,
+			DISPLAYSWITCH = (int32)Scancode.Displayswitch | SCANCODE_MASK,
 			KBDILLUMTOGGLE =
-				(int)Scancode.KbdIllumtoggle | SCANCODE_MASK,
-			KBDILLUMDOWN = (int)Scancode.KbdIllumdown | SCANCODE_MASK,
-			KBDILLUMUP = (int)Scancode.KbdIllumup | SCANCODE_MASK,
-			EJECT = (int)Scancode.Eject | SCANCODE_MASK,
-			SLEEP = (int)Scancode.Sleep | SCANCODE_MASK
+				(int32)Scancode.KbdIllumtoggle | SCANCODE_MASK,
+			KBDILLUMDOWN = (int32)Scancode.KbdIllumdown | SCANCODE_MASK,
+			KBDILLUMUP = (int32)Scancode.KbdIllumup | SCANCODE_MASK,
+			EJECT = (int32)Scancode.Eject | SCANCODE_MASK,
+			SLEEP = (int32)Scancode.Sleep | SCANCODE_MASK
 		}
 
 		/* Key modifiers (bitfield) */
@@ -3679,16 +3671,16 @@ namespace SDL2
 		/* Set the mouse cursor's position in global screen space */
 		/* Only available in 2.0.4 */
 		[LinkName("SDL_WarpMouseGlobal")]
-		public static extern int WarpMouseGlobal(int32 x, int32 y);
+		public static extern int32 WarpMouseGlobal(int32 x, int32 y);
 
 		/* Enable/Disable relative mouse mode (grabs mouse, rel coords) */
 		[LinkName("SDL_SetRelativeMouseMode")]
-		public static extern int SetRelativeMouseMode(Bool enabled);
+		public static extern int32 SetRelativeMouseMode(Bool enabled);
 
 		/* Capture the mouse, to track input outside an SDL window */
 		/* Only available in 2.0.4 */
 		[LinkName("SDL_CaptureMouse")]
-		public static extern int CaptureMouse(Bool enabled);
+		public static extern int32 CaptureMouse(Bool enabled);
 
 		/* Query if the relative mouse mode is enabled */
 		[LinkName("SDL_GetRelativeMouseMode")]
@@ -3785,7 +3777,7 @@ namespace SDL2
 		 *  \brief Get the number of active fingers for a given touch device.
 		 */
 		[LinkName("SDL_GetNumTouchFingers")]
-		public static extern int GetNumTouchFingers(int64 touchID);
+		public static extern int32 GetNumTouchFingers(int64 touchID);
 
 		/**
 		 *  \brief Get the finger object of the given touch, with the given index.
@@ -3835,7 +3827,7 @@ namespace SDL2
 		 * This function is only available in 2.0.9 or higher.
 		 */
 		[LinkName("SDL_JoystickRumble")]
-		public static extern int JoystickRumble(
+		public static extern int32 JoystickRumble(
 			SDL_Joystick* joystick,
 			uint16 low_frequency_rumble,
 			uint16 high_frequency_rumble,
@@ -3847,7 +3839,7 @@ namespace SDL2
 		public static extern void JoystickClose(SDL_Joystick* joystick);
 
 		[LinkName("SDL_JoystickEventState")]
-		public static extern int32 JoystickEventState(int state);
+		public static extern int32 JoystickEventState(int32 state);
 
 
 		[LinkName("SDL_JoystickGetAxis")]
@@ -3868,7 +3860,7 @@ namespace SDL2
 
 
 		[LinkName("SDL_JoystickGetBall")]
-		public static extern int JoystickGetBall(
+		public static extern int32 JoystickGetBall(
 			SDL_Joystick* joystick,
 			int32 ball,
 			out int32 dx,
@@ -3950,7 +3942,7 @@ namespace SDL2
 		[LinkName("SDL_JoystickGetDeviceType")]
 		public static extern SDL_JoystickType JoystickGetDeviceType(int32 device_index);
 
-		/* int refers to an SDL_JoystickID.
+		/* int32 refers to an SDL_JoystickID.
 		 * This function is only available in 2.0.6 or higher.
 		 */
 		[LinkName("SDL_JoystickGetDeviceInstanceID")]
@@ -3984,7 +3976,7 @@ namespace SDL2
 		[LinkName("SDL_JoystickGetAttached")]
 		public static extern Bool JoystickGetAttached(SDL_Joystick* joystick);
 
-		/* int refers to an SDL_JoystickID, joystick to an SDL_Joystick* */
+		/* int32 refers to an SDL_JoystickID, joystick to an SDL_Joystick* */
 		[LinkName("SDL_JoystickInstanceID")]
 		public static extern int32 JoystickInstanceID(SDL_Joystick* joystick);
 
@@ -3996,7 +3988,7 @@ namespace SDL2
 			SDL_Joystick* joystick
 			);
 
-		/* int refers to an SDL_JoystickID, IntPtr to an SDL_Joystick*.
+		/* int32 refers to an SDL_JoystickID, IntPtr to an SDL_Joystick*.
 		 * This function is only available in 2.0.4 or higher.
 		 */
 		[LinkName("SDL_JoystickFromInstanceID")]
@@ -4092,7 +4084,7 @@ namespace SDL2
 
 		/* This function is only available in 2.0.6 or higher. */
 		[LinkName("SDL_GameControllerNumMappings")]
-		public static extern int GameControllerNumMappings();
+		public static extern int32 GameControllerNumMappings();
 
 		/* This function is only available in 2.0.6 or higher. */
 		[LinkName("SDL_GameControllerMappingForIndex")]
@@ -4183,7 +4175,7 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_GameControllerEventState")]
-		public static extern int GameControllerEventState(int state);
+		public static extern int32 GameControllerEventState(int32 state);
 
 		[LinkName("SDL_GameControllerUpdate")]
 		public static extern void GameControllerUpdate();
@@ -4240,7 +4232,7 @@ namespace SDL2
 		 * This function is only available in 2.0.9 or higher.
 		 */
 		[LinkName("SDL_GameControllerRumble")]
-		public static extern int GameControllerRumble(
+		public static extern int32 GameControllerRumble(
 			SDL_GameController* gamecontroller,
 			uint16 low_frequency_rumble,
 			uint16 high_frequency_rumble,
@@ -4253,11 +4245,11 @@ namespace SDL2
 			SDL_GameController* gamecontroller
 			);
 
-		/* int refers to an SDL_JoystickID, IntPtr to an SDL_GameController*.
+		/* int32 refers to an SDL_JoystickID, IntPtr to an SDL_GameController*.
 		 * This function is only available in 2.0.4 or higher.
 		 */
 		[LinkName("SDL_GameControllerFromInstanceID")]
-		public static extern SDL_GameController* GameControllerFromInstanceID(int joyid);
+		public static extern SDL_GameController* GameControllerFromInstanceID(int32 joyid);
 
 		/* SDL_HapticEffect type */
 		public const uint16 SDL_HAPTIC_CONSTANT = (1 << 0);
@@ -4442,21 +4434,21 @@ namespace SDL2
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticEffectSupported")]
-		public static extern int HapticEffectSupported(
+		public static extern int32 HapticEffectSupported(
 			SDL_Haptic* haptic,
 			ref SDL_HapticEffect effect
 			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticGetEffectStatus")]
-		public static extern int HapticGetEffectStatus(
+		public static extern int32 HapticGetEffectStatus(
 			SDL_Haptic* haptic,
 			int32 effect
 			);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticIndex")]
-		public static extern int HapticIndex(SDL_Haptic* haptic);
+		public static extern int32 HapticIndex(SDL_Haptic* haptic);
 
 		/* haptic refers to an SDL_Haptic* */
 		[LinkName("SDL_HapticName")]
@@ -4607,14 +4599,14 @@ namespace SDL2
 		public static extern SDL_SensorType SensorGetDeviceType(int32 device_index);
 
 		[LinkName("SDL_SensorGetDeviceNonPortableType")]
-		public static extern int SensorGetDeviceNonPortableType(int32 device_index);
+		public static extern int32 SensorGetDeviceNonPortableType(int32 device_index);
 
 		[LinkName("SDL_SensorGetDeviceInstanceID")]
 		public static extern int32 SensorGetDeviceInstanceID(int32 device_index);
 
 		/* IntPtr refers to an SDL_Sensor* */
 		[LinkName("SDL_SensorOpen")]
-		public static extern SDL_Sensor* SensorOpen(int device_index);
+		public static extern SDL_Sensor* SensorOpen(int32 device_index);
 
 		/* IntPtr refers to an SDL_Sensor* */
 		[LinkName("SDL_SensorFromInstanceID")]
@@ -4634,7 +4626,7 @@ namespace SDL2
 
 		/* sensor refers to an SDL_Sensor* */
 		[LinkName("SDL_SensorGetNonPortableType")]
-		public static extern int SensorGetNonPortableType(SDL_Sensor* sensor);
+		public static extern int32 SensorGetNonPortableType(SDL_Sensor* sensor);
 
 		/* sensor refers to an SDL_Sensor* */
 		[LinkName("SDL_SensorGetInstanceID")]
@@ -4642,7 +4634,7 @@ namespace SDL2
 
 		/* sensor refers to an SDL_Sensor* */
 		[LinkName("SDL_SensorGetData")]
-		public static extern int SensorGetData(
+		public static extern int32 SensorGetData(
 			SDL_Sensor* sensor,
 			float* data,
 			int32 num_values
@@ -4756,7 +4748,7 @@ namespace SDL2
 		public function void AudioCallback(
 			void* userdata,
 			uint8* stream,
-			int len
+			int32 len
 			);
 
 		[LinkName("SDL_AudioInit")]
@@ -4798,10 +4790,10 @@ namespace SDL2
 		public static extern char8* GetCurrentAudioDriver();
 
 		[LinkName("SDL_GetNumAudioDevices")]
-		public static extern int GetNumAudioDevices(int iscapture);
+		public static extern int32 GetNumAudioDevices(int32 iscapture);
 
 		[LinkName("SDL_GetNumAudioDrivers")]
-		public static extern int GetNumAudioDrivers();
+		public static extern int32 GetNumAudioDrivers();
 
 		/* audio_buf will refer to a malloc()'d uint8 buffer */
 		/* THIS IS AN RWops FUNCTION! */
@@ -4857,7 +4849,7 @@ namespace SDL2
 			);
 
 		[LinkName("SDL_OpenAudio")]
-		public static extern int OpenAudio(
+		public static extern int32 OpenAudio(
 			ref SDL_AudioSpec desired,
 			SDL_AudioSpec* obtained
 			);
@@ -4896,7 +4888,7 @@ namespace SDL2
 		/* dev refers to an SDL_AudioDeviceID, data to a void* */
 		/* Only available in 2.0.4 */
 		[LinkName("SDL_QueueAudio")]
-		public static extern int QueueAudio(
+		public static extern int32 QueueAudio(
 			AudioDeviceID dev,
 			void* data,
 			uint32 len
@@ -4942,27 +4934,27 @@ namespace SDL2
 		 * Only available in 2.0.7
 		 */
 		[LinkName("SDL_AudioStreamPut")]
-		public static extern int AudioStreamPut(
+		public static extern int32 AudioStreamPut(
 			AudioStream* stream,
 			void* buf,
-			int len
+			int32 len
 			);
 
 		/* stream refers to an SDL_AudioStream*, buf to a void*.
 		 * Only available in 2.0.7
 		 */
 		[LinkName("SDL_AudioStreamGet")]
-		public static extern int AudioStreamGet(
+		public static extern int32 AudioStreamGet(
 			AudioStream* stream,
 			void* buf,
-			int len
+			int32 len
 			);
 
 		/* stream refers to an SDL_AudioStream*.
 		 * Only available in 2.0.7
 		 */
 		[LinkName("SDL_AudioStreamAvailable")]
-		public static extern int AudioStreamAvailable(AudioStream* stream);
+		public static extern int32 AudioStreamAvailable(AudioStream* stream);
 
 		/* stream refers to an SDL_AudioStream*.
 		 * Only available in 2.0.7
@@ -5007,9 +4999,9 @@ namespace SDL2
 		/* param refers to a void* */
 		public function uint32 TimerCallback(uint32 interval, void* param);
 
-		/* int refers to an SDL_TimerID, param to a void* */
+		/* int32 refers to an SDL_TimerID, param to a void* */
 		[LinkName("SDL_AddTimer")]
-		public static extern int AddTimer(
+		public static extern int32 AddTimer(
 			uint32 interval,
 			TimerCallback callback,
 			void* param
@@ -5040,7 +5032,7 @@ namespace SDL2
 		public function void iPhoneAnimationCallback(void* p);
 
 		[LinkName("SDL_iPhoneSetAnimationCallback")]
-		public static extern int iPhoneSetAnimationCallback(
+		public static extern int32 iPhoneSetAnimationCallback(
 			Window* window,/* SDL_Window* */
 			int32 interval,
 			iPhoneAnimationCallback callback,
@@ -5052,8 +5044,8 @@ namespace SDL2
 
 		/* Android */
 
-		public const int SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
-		public const int SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
+		public const int32 SDL_ANDROID_EXTERNAL_STORAGE_READ = 0x01;
+		public const int32 SDL_ANDROID_EXTERNAL_STORAGE_WRITE = 0x02;
 
 		public struct JNIEnv;
 
@@ -5081,7 +5073,7 @@ namespace SDL2
 		private static extern char8* AndroidGetInternalStoragePath();
 
 		[LinkName("SDL_AndroidGetExternalStorageState")]
-		public static extern int AndroidGetExternalStorageState();
+		public static extern int32 AndroidGetExternalStorageState();
 
 		[LinkName("SDL_AndroidGetExternalStoragePath")]
 		private static extern char8* AndroidGetExternalStoragePath();
@@ -5199,7 +5191,7 @@ namespace SDL2
 			public INTERNAL_wayland_wminfo wl;
 			public INTERNAL_mir_wminfo mir;
 			public INTERNAL_android_wminfo android;
-			// private int dummy;
+			// private int32 dummy;
 		}
 
 		[CRepr]
