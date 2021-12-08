@@ -2,9 +2,6 @@ project "sdl2"
    kind "StaticLib"
    windowstargetplatformversion("10.0")
    
-   flags {
-      "UseObjectResponseFile"
-   }
    defines {
       "SDL_VIDEO_OPENGL=0",
       "SDL_VIDEO_OPENGL_ES2=0",
